@@ -1,7 +1,5 @@
 import User from "../models/User.js";
 
-// ===================== ПРОФІЛЬ ПОТОЧНОГО КОРИСТУВАЧА =====================
-
 // GET /api/users/me
 export const getMe = async (req, res) => {
   try {
@@ -49,8 +47,6 @@ export const updateMe = async (req, res) => {
   }
 };
 
-// ===================== ДЛЯ ДІЄТОЛОГА =====================
-
 // GET /api/users/patients
 export const listPatients = async (req, res) => {
   try {
@@ -65,8 +61,6 @@ export const listPatients = async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 };
-
-// ===================== ДЛЯ АДМІНА =====================
 
 // GET /api/users
 export const listUsers = async (req, res) => {
