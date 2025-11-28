@@ -1,4 +1,4 @@
-import IoTMeasurement from "../models/IoTMeasurement.js";
+import IoTMeasurement from "../models/iotMeasurement.js";
 
 export const createMeasurement = async (req, res) => {
   try {

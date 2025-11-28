@@ -8,7 +8,6 @@ import {
   updateMeal,
   deleteMeal,
 } from "../controllers/meal.controller.js";
-
 import { protect } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
@@ -47,7 +46,6 @@ const router = express.Router();
  *                 format: date-time
  *               mealType:
  *                 type: string
- *                 example: breakfast
  *               mealProducts:
  *                 type: array
  *                 items:
@@ -142,7 +140,6 @@ router.delete("/:id/remove-product", protect, removeProductFromMeal);
  *         required: true
  *         schema:
  *           type: string
- *           example: 2025-01-25
  *     responses:
  *       200:
  *         description: Список прийомів їжі

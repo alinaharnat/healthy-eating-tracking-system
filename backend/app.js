@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./config/swagger.js";
+import swaggerSpec from "./swagger.js";
 
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
@@ -13,8 +13,6 @@ import reportRoutes from "./routes/report.routes.js";
 
 const app = express();
 
-// ================== MIDDLEWARE ==================
-
 app.use(
   cors({
     origin: process.env.ALLOWED_ORIGINS?.split(",") || "*",
@@ -25,11 +23,17 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ================== SWAGGER ==================
+app.use((req, res, next) => {
+  const legacyMatch = req.path.match(/^\/(get|post|put|patch|delete)\/(.+)/i);
+
+  if (legacyMatch && legacyMatch[1].toUpperCase() === req.method) {
+    req.url = `/api/${legacyMatch[2]}${req.url.slice(req.path.length)}`;
+  }
+
+  next();
+});
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-// ================== ROUTES ==================
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);

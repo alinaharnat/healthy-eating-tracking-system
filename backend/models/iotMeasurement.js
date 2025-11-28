@@ -1,7 +1,13 @@
-const { Schema, model, Types } = require("mongoose");
-const IoTSchema = new Schema(
+import mongoose from "mongoose";
+
+const IoTSchema = new mongoose.Schema(
   {
-    userId: { type: Types.ObjectId, ref: "User", required: true, index: true },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
     timestamp: { type: Date, required: true, index: true },
     pulse: Number,
     steps: Number,
@@ -9,4 +15,5 @@ const IoTSchema = new Schema(
   },
   { timestamps: true }
 );
-module.exports = model("IoTMeasurement", IoTSchema);
+
+export default mongoose.model("IoTMeasurement", IoTSchema);

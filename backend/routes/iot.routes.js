@@ -3,8 +3,7 @@ import {
   createMeasurement,
   latestMeasurements,
   deleteMeasurement,
-} from "../controllers/iotMeasurement.controller.js";
-
+} from "../controllers/iot.controller.js";
 import { protect } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
@@ -13,7 +12,7 @@ const router = express.Router();
  * @swagger
  * tags:
  *   name: IoT Measurements
- *   description: Дані з IoT пристроїв (пульс, кроки, вага)
+ *   description: Дані з IoT пристроїв
  */
 
 /**
@@ -36,18 +35,13 @@ const router = express.Router();
  *             properties:
  *               pulse:
  *                 type: number
- *                 example: 78
  *               steps:
  *                 type: number
- *                 example: 5400
  *               weight:
  *                 type: number
- *                 example: 62.5
  *     responses:
  *       201:
  *         description: Вимірювання успішно збережено
- *       400:
- *         description: Відсутні обов'язкові поля
  */
 router.post("/", protect, createMeasurement);
 
@@ -79,7 +73,6 @@ router.get("/latest", protect, latestMeasurements);
  *         required: true
  *         schema:
  *           type: string
- *         description: ID вимірювання
  *     responses:
  *       200:
  *         description: Вимірювання видалено

@@ -17,6 +17,7 @@ const router = express.Router();
  *   post:
  *     summary: Реєстрація користувача
  *     tags: [Auth]
+ *     security: []
  *     requestBody:
  *       required: true
  *       content:
@@ -48,6 +49,7 @@ router.post("/register", register);
  *   post:
  *     summary: Вхід користувача
  *     tags: [Auth]
+ *     security: []
  *     requestBody:
  *       required: true
  *       content:
