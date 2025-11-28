@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+
 const UserSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -16,7 +18,13 @@ const UserSchema = new mongoose.Schema(
     goalType: { type: String, enum: ["lose", "maintain", "gain"] },
     dailyCalorieGoal: { type: Number, default: 0 },
     dietitianId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
+
+UserSchema.methods.comparePassword = function (candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.passwordHash);
+};
+
 export default mongoose.model("User", UserSchema);

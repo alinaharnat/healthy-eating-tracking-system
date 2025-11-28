@@ -8,7 +8,7 @@ const IoTSchema = new mongoose.Schema(
       required: true,
       index: true,
     },
-    timestamp: { type: Date, required: true, index: true },
+    timestamp: { type: Date, default: Date.now, index: true },
     pulse: Number,
     steps: Number,
     weight: Number,

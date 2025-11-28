@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config(); // <-- ОБОВʼЯЗКОВО ПЕРШИМ
+
 import express from "express";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
@@ -12,6 +15,12 @@ import iotRoutes from "./routes/iot.routes.js";
 import reportRoutes from "./routes/report.routes.js";
 
 const app = express();
+
+// ✅ Перевірка що JWT ключ реально підтягується
+console.log(
+  "JWT SECRET LOADED:",
+  process.env.JWT_SECRET ? "✅ OK" : "❌ NOT FOUND"
+);
 
 app.use(
   cors({
@@ -33,8 +42,10 @@ app.use((req, res, next) => {
   next();
 });
 
+// ================== SWAGGER ==================
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// ================== ROUTES ==================
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/meals", mealRoutes);
@@ -43,7 +54,6 @@ app.use("/api/recommendations", recommendationRoutes);
 app.use("/api/iot-measurements", iotRoutes);
 app.use("/api/reports", reportRoutes);
 
-// Test route
 app.get("/", (req, res) => {
   res.json({
     message: "Macri API is running 🚀",
@@ -52,16 +62,12 @@ app.get("/", (req, res) => {
   });
 });
 
-// ================== 404 HANDLER ==================
-
 app.use((req, res) => {
   res.status(404).json({
     success: false,
     message: "Маршрут не знайдено",
   });
 });
-
-// ================== GLOBAL ERROR HANDLER ==================
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 
@@ -51,7 +51,9 @@ export const login = async (req, res) => {
     if (!user || !user.isActive)
       return res.status(401).json({ message: "Невірні дані" });
 
-    const isMatch = await user.comparePassword(password);
+    const isMatch = user.comparePassword
+      ? await user.comparePassword(password)
+      : await bcrypt.compare(password, user.passwordHash);
     if (!isMatch) return res.status(401).json({ message: "Невірні дані" });
 
     const token = generateToken(user._id, user.role);

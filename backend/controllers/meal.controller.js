@@ -1,10 +1,12 @@
-import Meal from "../models/Meal.js";
+import Meal from "../models/meal.js";
+import Product from "../models/product.js";
+import User from "../models/user.js";
 
 export const createMeal = async (req, res) => {
   try {
-    const { userId, date, mealType, mealProducts } = req.body;
+    const { userId = req.user._id, date, mealType, mealProducts } = req.body;
 
-    if (!userId || !!date || !mealType || !mealProducts) {
+    if (!userId || !date || !mealType || !mealProducts) {
       return res
         .status(400)
         .json({ message: "error: missing required fields" });
@@ -16,7 +18,13 @@ export const createMeal = async (req, res) => {
         .json({ message: "error: mealProducts must be a non-empty array" });
     }
 
-    const userExist = await User.findbyId(userId);
+    const mealDate = new Date(date);
+
+    if (Number.isNaN(mealDate.getTime())) {
+      return res.status(400).json({ message: "error: invalid date" });
+    }
+
+    const userExist = await User.findById(userId);
 
     if (!userExist) {
       return res.status(404).json({ message: "error: user not found" });
@@ -33,10 +41,12 @@ export const createMeal = async (req, res) => {
 
     const newMeal = await Meal.create({
       userId,
-      date,
+      date: mealDate,
       mealType,
       mealProducts,
     });
+
+    return res.status(201).json(newMeal);
   } catch (error) {
     console.error("Error creating meal:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -44,7 +54,7 @@ export const createMeal = async (req, res) => {
 };
 
 export const addProductToMeal = async (req, res) => {
-  const mealId = req.params;
+  const mealId = req.params.id;
   const { productId, weightGrams } = req.body;
   try {
     if (!productId || !weightGrams) {

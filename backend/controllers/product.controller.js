@@ -1,4 +1,4 @@
-import Product from "../models/Product.js";
+import Product from "../models/product.js";
 
 export const createProduct = async (req, res) => {
   try {
@@ -8,13 +8,16 @@ export const createProduct = async (req, res) => {
       return res.status(400).json({ message: "Product name is required" });
     }
 
-    const existing = await Product.findOne({ name: name.trim().toLowerCase() });
+    const normalizedName = name.trim().toLowerCase();
+
+    const existing = await Product.findOne({ normalizedName });
     if (existing) {
       return res.status(409).json({ message: "Product already exists" });
     }
 
     const product = await Product.create({
       name: name.trim(),
+      normalizedName,
       calories,
       proteins,
       fats,
@@ -34,7 +37,14 @@ export const updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
 
-    const updated = await Product.findByIdAndUpdate(productId, req.body, {
+    const payload = { ...req.body };
+
+    if (payload.name) {
+      payload.name = payload.name.trim();
+      payload.normalizedName = payload.name.toLowerCase();
+    }
+
+    const updated = await Product.findByIdAndUpdate(productId, payload, {
       new: true,
       runValidators: true,
     });
