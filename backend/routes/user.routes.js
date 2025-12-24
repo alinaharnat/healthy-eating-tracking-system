@@ -3,10 +3,6 @@ import {
   getMe,
   updateMe,
   listPatients,
-  listUsers,
-  adminUpdateUser,
-  adminDeleteUser,
-  adminStatistics,
 } from "../controllers/user.controller.js";
 
 import { protect, authorize } from "../middleware/auth.middleware.js";
@@ -28,6 +24,9 @@ const router = express.Router();
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Дані користувача
  */
 router.get("/me", protect, getMe);
 
@@ -39,6 +38,39 @@ router.get("/me", protect, getMe);
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "Alina"
+ *               language:
+ *                 type: string
+ *                 enum: ["ua", "en"]
+ *                 example: "ua"
+ *               age:
+ *                 type: number
+ *                 example: 21
+ *               height:
+ *                 type: number
+ *                 example: 165
+ *               weight:
+ *                 type: number
+ *                 example: 55
+ *               goalType:
+ *                 type: string
+ *                 enum: ["lose", "maintain", "gain"]
+ *                 example: "lose"
+ *               dailyCalorieGoal:
+ *                 type: number
+ *                 example: 1800
+ *     responses:
+ *       200:
+ *         description: Профіль оновлено
  */
 router.patch("/me", protect, updateMe);
 
@@ -50,51 +82,10 @@ router.patch("/me", protect, updateMe);
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Список пацієнтів
  */
 router.get("/patients", protect, authorize("dietitian"), listPatients);
-
-/**
- * @swagger
- * /api/users:
- *   get:
- *     summary: Отримати всіх користувачів
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- */
-router.get("/", protect, authorize("admin"), listUsers);
-
-/**
- * @swagger
- * /api/users/{id}:
- *   patch:
- *     summary: Оновити користувача (адмін)
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- */
-router.patch("/:id", protect, authorize("admin"), adminUpdateUser);
-
-/**
- * @swagger
- * /api/users/{id}:
- *   delete:
- *     summary: Видалити користувача
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- */
-router.delete("/:id", protect, authorize("admin"), adminDeleteUser);
-
-/**
- * @swagger
- * /api/users/stats:
- *   get:
- *     summary: Статистика користувачів
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- */
-router.get("/stats", protect, authorize("admin"), adminStatistics);
 
 export default router;

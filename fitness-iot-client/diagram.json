@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "editor": "wokwi",
+  "author": "arduino-test",
+  "parts": [
+    {
+      "type": "wokwi-arduino-uno",
+      "id": "uno",
+      "top": 0,
+      "left": 0
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd",
+      "top": 200,
+      "left": 40
+    }
+  ],
+  "connections": [
+    [ "uno:5V", "lcd:VDD", "red" ],
+    [ "uno:GND.1", "lcd:VSS", "black" ],
+    [ "uno:GND.2", "lcd:RW", "black" ],
+    [ "uno:GND.3", "lcd:V0", "black" ],
+
+    [ "uno:8", "lcd:RS", "green" ],
+    [ "uno:9", "lcd:E", "green" ],
+    [ "uno:10", "lcd:D4", "green" ],
+    [ "uno:11", "lcd:D5", "green" ],
+    [ "uno:12", "lcd:D6", "green" ],
+    [ "uno:13", "lcd:D7", "green" ],
+
+    [ "uno:5V", "lcd:A", "red" ],
+    [ "uno:GND.4", "lcd:K", "black" ]
+  ]
+}

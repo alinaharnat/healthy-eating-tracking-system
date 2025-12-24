@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config(); // <-- ОБОВʼЯЗКОВО ПЕРШИМ
+dotenv.config();
 
 import express from "express";
 import cors from "cors";
@@ -13,10 +13,11 @@ import productRoutes from "./routes/product.routes.js";
 import recommendationRoutes from "./routes/recommendation.routes.js";
 import iotRoutes from "./routes/iot.routes.js";
 import reportRoutes from "./routes/report.routes.js";
+import analyticsRoutes from "./routes/analytics.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
 
 const app = express();
 
-// ✅ Перевірка що JWT ключ реально підтягується
 console.log(
   "JWT SECRET LOADED:",
   process.env.JWT_SECRET ? "✅ OK" : "❌ NOT FOUND"
@@ -45,7 +46,7 @@ app.use((req, res, next) => {
 // ================== SWAGGER ==================
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// ================== ROUTES ==================
+// ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/meals", mealRoutes);
@@ -53,10 +54,12 @@ app.use("/api/products", productRoutes);
 app.use("/api/recommendations", recommendationRoutes);
 app.use("/api/iot-measurements", iotRoutes);
 app.use("/api/reports", reportRoutes);
+app.use("/api/analytics", analyticsRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => {
   res.json({
-    message: "Macri API is running 🚀",
+    message: "Macri API is running",
     version: "1.0.0",
     docs: "/api-docs",
   });

@@ -13,7 +13,26 @@ const options = {
         url: "http://localhost:5000",
       },
     ],
+
+    // 🔥 Додаємо JWT авторизацію
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+
+    // 🔐 Автоматично вмикаємо авторизацію для ВСІХ маршрутів
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
+
   apis: ["./routes/*.js"],
 };
 
