@@ -29,8 +29,8 @@ const router = express.Router();
  *       Повертає сумарну кількість калорій, білків, жирів та вуглеводів за обрану дату.
  *       Якщо дату не вказано, використовується поточна дата.
  *
- *       Значення розраховується на основі всіх прийомів їжі користувача:
- *       **калорії = product.calories × weightGrams / 100**
+ *       Формула:
+ *       калорії = product.calories × weightGrams / 100
  *     parameters:
  *       - in: query
  *         name: date
@@ -43,6 +43,7 @@ const router = express.Router();
  *       200:
  *         description: Успішне отримання денного підсумку
  */
+router.get("/daily", protect, getDailyNutritionSummary);
 
 /**
  * @swagger
@@ -56,12 +57,12 @@ const router = express.Router();
  *       Аналізує харчування користувача за 7 або 30 днів.
  *
  *       Повертає:
- *         • середнє денне споживання калорій  
- *         • мінімальні та максимальні значення  
- *         • «критичний день» — день із найбільшим переїданням  
+ *         • середнє денне споживання калорій
+ *         • мінімальні та максимальні значення
+ *         • «критичний день» — день із найбільшим переїданням
  *
  *       Дані групуються за датами та аналізуються поміж прийомів їжі.
-     parameters:
+ *     parameters:
  *       - in: query
  *         name: period
  *         schema:
@@ -73,6 +74,7 @@ const router = express.Router();
  *       200:
  *         description: Аналітика за вказаний період
  */
+router.get("/period", protect, getPeriodAnalytics);
 
 /**
  * @swagger
@@ -86,12 +88,12 @@ const router = express.Router();
  *       Повертає зведення активності за IoT-вимірюваннями:
  *
  *       • сумарна кількість кроків
- *       • витрачені калорії (**формула = steps × 0.04**)
+ *       • витрачені калорії (формула = steps × 0.04)
  *       • остання зафіксована вага
  *
  *       Доступні два режими:
- *       - **day** — дані за сьогодні
- *       - **week** — дані за останні 7 днів
+ *       - day — дані за сьогодні
+ *       - week — дані за останні 7 днів
  *     parameters:
  *       - in: query
  *         name: period
@@ -104,6 +106,7 @@ const router = express.Router();
  *       200:
  *         description: Зведення фізичної активності користувача
  */
+router.get("/activity", protect, getActivitySummary);
 
 /**
  * @swagger
@@ -116,24 +119,15 @@ const router = express.Router();
  *     description: |
  *       Генерує рекомендації на основі поведінки користувача:
  *
- *       **1. Перевищення калорій 3 дні поспіль**
- *       → порада зменшити порції
+ *       1. Перевищення калорій 3 дні поспіль — порада зменшити порції
+ *       2. Низький рівень білків — рекомендація додати білкові продукти
+ *       3. Низька фізична активність (кроки < 5000) — порада більше рухатись
  *
- *       **2. Низький рівень білків**
- *       → рекомендація додати білкові продукти
- *
- *       **3. Низька фізична активність (кроки < 5000)**
- *       → порада збільшити рухливість
- *
- *       Всі рекомендації зберігаються у колекції *Recommendation*.
+ *       Усі рекомендації зберігаються у колекції Recommendation.
  *     responses:
  *       200:
  *         description: Рекомендації успішно сформовано
  */
-
-router.get("/daily", protect, getDailyNutritionSummary);
-router.get("/period", protect, getPeriodAnalytics);
-router.get("/activity", protect, getActivitySummary);
 router.post("/recommendations/auto", protect, generateAutoRecommendations);
 
 export default router;
