@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 import express from "express";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
@@ -13,15 +10,8 @@ import productRoutes from "./routes/product.routes.js";
 import recommendationRoutes from "./routes/recommendation.routes.js";
 import iotRoutes from "./routes/iot.routes.js";
 import reportRoutes from "./routes/report.routes.js";
-import analyticsRoutes from "./routes/analytics.routes.js";
-import adminRoutes from "./routes/admin.routes.js";
 
 const app = express();
-
-console.log(
-  "JWT SECRET LOADED:",
-  process.env.JWT_SECRET ? "✅ OK" : "❌ NOT FOUND"
-);
 
 app.use(
   cors({
@@ -43,10 +33,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// ================== SWAGGER ==================
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/meals", mealRoutes);
@@ -54,16 +42,17 @@ app.use("/api/products", productRoutes);
 app.use("/api/recommendations", recommendationRoutes);
 app.use("/api/iot-measurements", iotRoutes);
 app.use("/api/reports", reportRoutes);
-app.use("/api/analytics", analyticsRoutes);
-app.use("/api/admin", adminRoutes);
 
+// Test route
 app.get("/", (req, res) => {
   res.json({
-    message: "Macri API is running",
+    message: "Macri API is running 🚀",
     version: "1.0.0",
     docs: "/api-docs",
   });
 });
+
+// ================== 404 HANDLER ==================
 
 app.use((req, res) => {
   res.status(404).json({
@@ -71,6 +60,8 @@ app.use((req, res) => {
     message: "Маршрут не знайдено",
   });
 });
+
+// ================== GLOBAL ERROR HANDLER ==================
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
