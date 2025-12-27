@@ -34,7 +34,7 @@ const router = express.Router();
  *     description: Доступно лише адміністратору. Повертає список усіх користувачів системи.
  *     responses:
  *       200:
- *         description: Список користувачів успішно отримано.
+ *         description: Список користувачів успішно отримано
  */
 router.get("/users", protect, authorize("admin"), getAllUsers);
 
@@ -46,7 +46,7 @@ router.get("/users", protect, authorize("admin"), getAllUsers);
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
- *     description: Дозволяє адміністратору змінити роль користувача (client, dietitian, admin).
+ *     description: Дозволяє адміністратору змінити роль користувача (client, dietitian, admin)
  *     parameters:
  *       - in: path
  *         name: userId
@@ -66,7 +66,7 @@ router.get("/users", protect, authorize("admin"), getAllUsers);
  *                 enum: [client, dietitian, admin]
  *     responses:
  *       200:
- *         description: Роль користувача змінено.
+ *         description: Роль користувача змінено
  */
 router.patch(
   "/users/:userId/role",
@@ -83,7 +83,7 @@ router.patch(
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
- *     description: Переводить користувача у статус isActive = false.
+ *     description: Переводить користувача у статус isActive = false
  *     parameters:
  *       - in: path
  *         name: userId
@@ -92,7 +92,7 @@ router.patch(
  *           type: string
  *     responses:
  *       200:
- *         description: Користувача заблоковано.
+ *         description: Користувача заблоковано
  */
 router.patch("/users/:userId/block", protect, authorize("admin"), blockUser);
 
@@ -104,7 +104,7 @@ router.patch("/users/:userId/block", protect, authorize("admin"), blockUser);
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
- *     description: Переводить користувача у статус isActive = true.
+ *     description: Переводить користувача у статус isActive = true
  *     parameters:
  *       - in: path
  *         name: userId
@@ -113,7 +113,7 @@ router.patch("/users/:userId/block", protect, authorize("admin"), blockUser);
  *           type: string
  *     responses:
  *       200:
- *         description: Користувача розблоковано.
+ *         description: Користувача розблоковано
  */
 router.patch(
   "/users/:userId/unblock",
@@ -130,7 +130,7 @@ router.patch(
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
- *     description: Повертає детальну інформацію про користувача: профіль, його прийоми їжі, IoT вимірювання.
+ *     description: Повертає профіль користувача, його прийоми їжі та IoT вимірювання
  *     parameters:
  *       - in: path
  *         name: userId
@@ -139,7 +139,7 @@ router.patch(
  *           type: string
  *     responses:
  *       200:
- *         description: Дані активності користувача отримано.
+ *         description: Дані активності користувача отримано
  */
 router.get(
   "/users/:userId/activity",
@@ -156,7 +156,7 @@ router.get(
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
- *     description: Дозволяє адміністратору оновлювати харчові параметри продуктів.
+ *     description: Оновлює харчові параметри продуктів
  *     parameters:
  *       - in: path
  *         name: productId
@@ -171,7 +171,7 @@ router.get(
  *             type: object
  *     responses:
  *       200:
- *         description: Продукт оновлено.
+ *         description: Продукт оновлено
  */
 router.patch(
   "/products/:productId",
@@ -188,7 +188,7 @@ router.patch(
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
- *     description: Дозволяє адміністратору видалити продукт із системи.
+ *     description: Видаляє продукт із системи
  *     parameters:
  *       - in: path
  *         name: productId
@@ -197,7 +197,7 @@ router.patch(
  *           type: string
  *     responses:
  *       200:
- *         description: Продукт видалено.
+ *         description: Продукт видалено
  */
 router.delete(
   "/products/:productId",
@@ -215,13 +215,13 @@ router.delete(
  *     security:
  *       - bearerAuth: []
  *     description: |
- *       Повертає ключові статистичні показники системи:
+ *       Повертає:
  *       • кількість користувачів по ролях
  *       • найуживаніші продукти
- *       • середня калорійність раціону
+ *       • середню калорійність раціону
  *     responses:
  *       200:
- *         description: Статистика успішно отримана.
+ *         description: Статистика успішно отримана
  */
 router.get("/statistics", protect, authorize("admin"), getSystemStatistics);
 
@@ -229,14 +229,14 @@ router.get("/statistics", protect, authorize("admin"), getSystemStatistics);
  * @swagger
  * /api/admin/export:
  *   get:
- *     summary: Експортувати всю базу даних у JSON
+ *     summary: Експортувати базу даних у JSON
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
- *     description: Експортує користувачів, продукти, прийоми їжі та IoT-вимірювання.
+ *     description: Експортує користувачів, продукти, прийоми їжі та IoT-вимірювання
  *     responses:
  *       200:
- *         description: Експорт виконано успішно.
+ *         description: Експорт виконано успішно
  */
 router.get("/export", protect, authorize("admin"), exportDatabase);
 
@@ -250,7 +250,7 @@ router.get("/export", protect, authorize("admin"), exportDatabase);
  *       - bearerAuth: []
  *     description: |
  *       Повністю очищує систему та імпортує нові дані.
- *       Використовувати тільки у випадку відновлення або перенесення проєкту.
+ *       Використовувати лише для відновлення або перенесення проєкту.
  *     requestBody:
  *       required: true
  *       content:
@@ -268,7 +268,7 @@ router.get("/export", protect, authorize("admin"), exportDatabase);
  *                 type: array
  *     responses:
  *       200:
- *         description: Імпорт завершено.
+ *         description: Імпорт завершено
  */
 router.post("/import", protect, authorize("admin"), importDatabase);
 
