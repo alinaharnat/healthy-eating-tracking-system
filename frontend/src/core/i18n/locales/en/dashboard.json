@@ -1,0 +1,28 @@
+{
+  "client": {
+    "title": "Client Dashboard",
+    "description": "Track nutrition, view your daily summary, and manage your meal workflow.",
+    "lastUpdated": "Last updated",
+    "dailyCalories": "Daily calories",
+    "dailyCaloriesValue": "{{value}} kcal",
+    "showNotification": "Show localized notification"
+  },
+  "actions": {
+    "refresh": "Refresh"
+  },
+  "cards": {
+    "dailyCalories": "Today calories",
+    "goal": "Goal: {{value}} kcal",
+    "weekAverage": "Weekly average",
+    "periodWeek": "Past 7 days",
+    "activityWeek": "Activity for selected period",
+    "fromIot": "Calculated from IoT",
+    "activeItems": "Active items",
+    "uploaded": "Uploaded records",
+    "kcal": "{{value}} kcal"
+  },
+  "dietitian": {
+    "title": "Dietitian Dashboard",
+    "description": "Monitor assigned patients and manage recommendation workflows."
+  }
+}

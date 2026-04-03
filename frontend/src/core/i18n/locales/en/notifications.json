@@ -1,0 +1,9 @@
+{
+  "auth": {
+    "loginFailed": "Sign in failed. {{reason}}",
+    "registerFailed": "Registration failed. {{reason}}"
+  },
+  "unknownError": "Please try again.",
+  "languageChanged": "Language changed successfully",
+  "sampleDashboard": "You are viewing translated notifications"
+}

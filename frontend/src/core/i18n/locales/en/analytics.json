@@ -1,0 +1,26 @@
+{
+  "title": "Analytics",
+  "empty": "No analytics data yet",
+  "activity": {
+    "title": "Activity",
+    "description": "Track your movement, steps, pulse, and body metrics from IoT devices.",
+    "period": "Period",
+    "day": "Today",
+    "week": "This week",
+    "steps": "Steps",
+    "burnedCalories": "Burned calories",
+    "estimated": "Estimated",
+    "lastWeight": "Last weight",
+    "latestMeasurement": "Latest measurement",
+    "notAvailable": "Not available",
+    "kcal": "{{value}} kcal",
+    "kg": "{{value}} kg",
+    "addMeasurement": "Add measurement",
+    "saveMeasurement": "Save measurement",
+    "latestMeasurements": "Latest measurements",
+    "emptyMeasurements": "No measurements yet",
+    "recordedAt": "Recorded at",
+    "pulse": "Pulse",
+    "weight": "Weight"
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "title": "Admin Control Center",
+  "sidebarTitle": "Macro Admin",
+  "navigation": {
+    "overview": "Overview",
+    "users": "Users",
+    "products": "Products",
+    "statistics": "Statistics",
+    "backup": "Backup & Import"
+  },
+  "actions": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving...",
+    "delete": "Delete",
+    "block": "Block",
+    "unblock": "Unblock",
+    "changeRole": "Change role",
+    "viewActivity": "View activity",
+    "backToUsers": "Back to users"
+  },
+  "users": {
+    "title": "User Management",
+    "description": "Change roles, block or unblock users, and review user activity.",
+    "search": "Search user",
+    "tableTitle": "Users list",
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "empty": "No users found",
+    "emptyDescription": "No users match the current filters."
+  },
+  "roles": {
+    "client": "Client",
+    "dietitian": "Dietitian",
+    "admin": "Admin"
+  },
+  "status": {
+    "active": "Active",
+    "blocked": "Blocked"
+  },
+  "dialogs": {
+    "roleChange": {
+      "title": "Change user role"
+    },
+    "block": {
+      "title": "Block user?",
+      "description": "User {{name}} will be blocked and access will be revoked."
+    },
+    "unblock": {
+      "title": "Unblock user?",
+      "description": "User {{name}} will regain access to the system."
+    }
+  },
+  "overview": {
+    "title": "Admin Overview",
+    "description": "System-level control panel with governance and platform activity visibility.",
+    "quickActions": "Quick actions"
+  },
+  "activity": {
+    "title": "User Activity",
+    "description": "Inspect full nutrition and IoT activity for a selected user.",
+    "mealsTitle": "Meals history",
+    "measurementsTitle": "IoT measurements",
+    "emptyMeals": "No meals available",
+    "emptyMeasurements": "No measurements available",
+    "columns": {
+      "date": "Date",
+      "mealType": "Meal type",
+      "products": "Products",
+      "calories": "Calories"
+    }
+  },
+  "products": {
+    "title": "Products Management",
+    "description": "Edit or delete product records with admin privileges.",
+    "search": "Search product",
+    "emptyTitle": "No products found",
+    "emptyDescription": "Try a different search query.",
+    "columns": {
+      "name": "Name",
+      "calories": "Calories",
+      "proteins": "Proteins",
+      "fats": "Fats",
+      "carbs": "Carbs",
+      "actions": "Actions"
+    },
+    "dialogs": {
+      "editTitle": "Edit product",
+      "deleteTitle": "Delete product?",
+      "deleteDescription": "Product {{name}} will be removed permanently."
+    }
+  },
+  "statistics": {
+    "title": "System Statistics",
+    "description": "Review global metrics, consumption patterns, and operational trends.",
+    "units": {
+      "kcal": "kcal"
+    },
+    "cards": {
+      "totalUsers": "Total users",
+      "clients": "Clients",
+      "dietitians": "Dietitians",
+      "averageCalories": "Average calories"
+    },
+    "mostUsedTitle": "Most used products",
+    "emptyProducts": "No usage data available",
+    "unknownProduct": "Unknown product",
+    "columns": {
+      "product": "Product",
+      "usage": "Usage",
+      "calories": "Calories"
+    }
+  },
+  "backup": {
+    "title": "Backup & Import/Export",
+    "description": "Create backups and import data/settings snapshots.",
+    "controlsTitle": "Data transfer controls",
+    "controlsDescription": "Export the full database as JSON or import a previously exported snapshot.",
+    "actions": {
+      "export": "Export backup",
+      "exporting": "Exporting...",
+      "import": "Import file",
+      "importing": "Importing..."
+    }
+  },
+  "feedback": {
+    "roleUpdated": "Role updated",
+    "userBlocked": "User blocked",
+    "userUnblocked": "User unblocked",
+    "productUpdated": "Product updated",
+    "productDeleted": "Product deleted",
+    "backupExported": "Backup exported successfully",
+    "importCompleted": "Import completed",
+    "invalidJsonFile": "Invalid JSON file format"
+  }
+}

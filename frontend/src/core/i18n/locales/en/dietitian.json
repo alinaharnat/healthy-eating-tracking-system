@@ -1,0 +1,103 @@
+{
+  "navigation": {
+    "dashboard": "Dashboard",
+    "patients": "Patients",
+    "recommendations": "Recommendation History",
+    "createRecommendation": "New Recommendation"
+  },
+  "actions": {
+    "open": "Open",
+    "recommend": "Recommend",
+    "createRecommendation": "Create Recommendation",
+    "viewPatients": "View Patients",
+    "retry": "Retry",
+    "backToPatients": "Back to Patients",
+    "backToHistory": "Back to History",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel"
+  },
+  "goals": {
+    "notDefined": "Goal not defined"
+  },
+  "dashboard": {
+    "title": "Dietitian Dashboard",
+    "description": "Monitor assigned patients and manage recommendations from one workspace.",
+    "metrics": {
+      "assignedPatients": "Assigned patients",
+      "activeGoals": "Patients with goals",
+      "recommendations": "Total recommendations"
+    },
+    "recentTitle": "Recent recommendations",
+    "emptyRecommendationsTitle": "No recommendations yet",
+    "emptyRecommendationsDescription": "Create recommendations to populate the recent timeline."
+  },
+  "patients": {
+    "title": "Assigned Patients",
+    "description": "Review your patient roster and open profile details.",
+    "search": "Search patient",
+    "unknownName": "Unknown user",
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "goal": "Goal",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "emptyTitle": "No assigned patients",
+    "emptyDescription": "You do not have assigned patients yet."
+  },
+  "patientDetails": {
+    "title": "Patient Details",
+    "description": "Read-only profile and recommendation history for this patient.",
+    "fields": {
+      "goal": "Goal type",
+      "dailyGoal": "Daily calorie goal",
+      "age": "Age",
+      "weight": "Weight"
+    },
+    "notAvailable": "Not available",
+    "readOnlyTitle": "Nutrition and activity overview",
+    "readOnlyDescription": "Read-only details are based on available profile data. Additional activity analytics require a dedicated backend endpoint.",
+    "timelineTitle": "Recommendation history",
+    "emptyRecommendationsTitle": "No recommendations for this patient",
+    "emptyRecommendationsDescription": "Create a recommendation to start the history.",
+    "notFoundTitle": "Patient not found",
+    "notFoundDescription": "This patient is not available in your assigned list."
+  },
+  "create": {
+    "title": "Create Recommendation",
+    "description": "Select a patient and write actionable guidance.",
+    "emptyPatientsTitle": "No assigned patients",
+    "emptyPatientsDescription": "Recommendations require at least one assigned patient."
+  },
+  "management": {
+    "title": "Recommendation Management",
+    "description": "Review, filter, and remove your recommendation history.",
+    "filterPatient": "Patient",
+    "allPatients": "All patients",
+    "emptyTitle": "No recommendations yet",
+    "emptyDescription": "Create your first recommendation to start tracking guidance history."
+  },
+  "form": {
+    "title": "Recommendation Form",
+    "description": "Use concise and specific guidance tailored to the patient's goal.",
+    "patient": "Patient",
+    "message": "Recommendation",
+    "messagePlaceholder": "Example: Increase protein intake at breakfast and add a 20-minute evening walk.",
+    "validation": {
+      "required": "Patient and recommendation text are required."
+    }
+  },
+  "timeline": {
+    "emptyTitle": "No recommendations available",
+    "emptyDescription": "Create a recommendation to populate this timeline.",
+    "unknownPatient": "Unknown patient",
+    "deleteDialogTitle": "Delete recommendation?",
+    "deleteDialogDescription": "This action cannot be undone."
+  }
+}

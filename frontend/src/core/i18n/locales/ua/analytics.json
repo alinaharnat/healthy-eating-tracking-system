@@ -1,0 +1,26 @@
+{
+  "title": "Аналітика",
+  "empty": "Поки що немає даних аналітики",
+  "activity": {
+    "title": "Активність",
+    "description": "Відстежуйте рух, кроки, пульс та параметри тіла з IoT-пристроїв.",
+    "period": "Період",
+    "day": "Сьогодні",
+    "week": "Цей тиждень",
+    "steps": "Кроки",
+    "burnedCalories": "Спалені калорії",
+    "estimated": "Оцінка",
+    "lastWeight": "Остання вага",
+    "latestMeasurement": "Останнє вимірювання",
+    "notAvailable": "Немає даних",
+    "kcal": "{{value}} ккал",
+    "kg": "{{value}} кг",
+    "addMeasurement": "Додати вимірювання",
+    "saveMeasurement": "Зберегти вимірювання",
+    "latestMeasurements": "Останні вимірювання",
+    "emptyMeasurements": "Вимірювання відсутні",
+    "recordedAt": "Час запису",
+    "pulse": "Пульс",
+    "weight": "Вага"
+  }
+}

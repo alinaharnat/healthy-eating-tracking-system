@@ -1,0 +1,7 @@
+{
+  "title": "Recommendations",
+  "description": "Get personalized guidance generated from your nutrition and activity data.",
+  "empty": "No recommendations available",
+  "emptyDescription": "Generate your first recommendation to receive suggestions.",
+  "generateAction": "Generate recommendation"
+}

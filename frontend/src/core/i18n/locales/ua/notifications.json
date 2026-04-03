@@ -1,0 +1,9 @@
+{
+  "auth": {
+    "loginFailed": "Не вдалося увійти. {{reason}}",
+    "registerFailed": "Не вдалося зареєструватися. {{reason}}"
+  },
+  "unknownError": "Спробуйте ще раз.",
+  "languageChanged": "Мову успішно змінено",
+  "sampleDashboard": "Ви переглядаєте локалізовані сповіщення"
+}

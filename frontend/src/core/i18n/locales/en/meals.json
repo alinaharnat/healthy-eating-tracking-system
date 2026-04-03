@@ -1,0 +1,52 @@
+{
+  "title": "Meals",
+  "description": "Create and manage meals, then review history by day and period.",
+  "empty": "No meals for selected period",
+  "actions": {
+    "create": "Create meal"
+  },
+  "filter": {
+    "date": "Date"
+  },
+  "types": {
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "snack": "Snack"
+  },
+  "history": {
+    "title": "Meal History",
+    "description": "Review meals from previous days and summarize your intake.",
+    "period": "Period",
+    "week": "Last week",
+    "month": "Last month",
+    "items": "{{count}} items",
+    "emptyDescription": "Try switching period or add new meals first."
+  },
+  "list": {
+    "emptyDescription": "Start by creating your first meal for this date.",
+    "createFirst": "Create first meal",
+    "addProduct": "Add product",
+    "noProducts": "No products added yet"
+  },
+  "form": {
+    "createTitle": "Create Meal",
+    "editTitle": "Edit Meal",
+    "mealType": "Meal type",
+    "date": "Date and time",
+    "products": "Products",
+    "addProduct": "Add product",
+    "emptyProducts": "No products selected",
+    "totalCalories": "Estimated total: {{value}} kcal",
+    "saving": "Saving...",
+    "create": "Create",
+    "update": "Update"
+  },
+  "productDialog": {
+    "title": "Select Product",
+    "searchLabel": "Product",
+    "searchPlaceholder": "Start typing product name",
+    "weightLabel": "Weight (grams)",
+    "confirm": "Add to meal"
+  }
+}

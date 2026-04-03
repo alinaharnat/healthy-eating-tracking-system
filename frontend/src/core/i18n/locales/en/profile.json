@@ -1,0 +1,21 @@
+{
+  "title": "Profile Settings",
+  "description": "Manage your personal details, language, and nutrition goal.",
+  "save": "Save changes",
+  "saving": "Saving...",
+  "fields": {
+    "name": "Name",
+    "language": "Language",
+    "age": "Age",
+    "height": "Height (cm)",
+    "weight": "Weight (kg)",
+    "goalType": "Goal",
+    "dailyCalorieGoal": "Daily calorie goal",
+    "dietitianId": "Assigned dietitian"
+  },
+  "goals": {
+    "lose": "Lose weight",
+    "maintain": "Maintain weight",
+    "gain": "Gain weight"
+  }
+}

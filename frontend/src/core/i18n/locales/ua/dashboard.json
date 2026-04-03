@@ -1,0 +1,28 @@
+{
+  "client": {
+    "title": "Панель клієнта",
+    "description": "Відстежуйте харчування, переглядайте денний підсумок та керуйте прийомами їжі.",
+    "lastUpdated": "Останнє оновлення",
+    "dailyCalories": "Денні калорії",
+    "dailyCaloriesValue": "{{value}} ккал",
+    "showNotification": "Показати локалізоване сповіщення"
+  },
+  "actions": {
+    "refresh": "Оновити"
+  },
+  "cards": {
+    "dailyCalories": "Калорії за сьогодні",
+    "goal": "Ціль: {{value}} ккал",
+    "weekAverage": "Середнє за тиждень",
+    "periodWeek": "Останні 7 днів",
+    "activityWeek": "Активність за період",
+    "fromIot": "Розраховано з IoT",
+    "activeItems": "Активні записи",
+    "uploaded": "Завантажені записи",
+    "kcal": "{{value}} ккал"
+  },
+  "dietitian": {
+    "title": "Панель дієтолога",
+    "description": "Контролюйте пацієнтів і керуйте рекомендаціями."
+  }
+}

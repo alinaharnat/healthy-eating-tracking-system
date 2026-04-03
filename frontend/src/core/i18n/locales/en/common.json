@@ -1,0 +1,79 @@
+{
+  "app": {
+    "name": "Macro"
+  },
+  "language": {
+    "label": "Language",
+    "english": "English",
+    "ukrainian": "Ukrainian"
+  },
+  "actions": {
+    "logout": "Logout",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "retry": "Retry",
+    "create": "Create",
+    "delete": "Delete",
+    "goHome": "Go home",
+    "backToSignIn": "Back to sign in"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "meals": "Meals",
+    "history": "Meal History",
+    "activity": "Activity",
+    "reports": "Reports",
+    "products": "Products",
+    "profile": "Profile",
+    "patients": "Patients",
+    "recommendations": "Recommendations",
+    "overview": "Overview",
+    "users": "Users",
+    "statistics": "Statistics"
+  },
+  "workspace": {
+    "client": "Client Workspace",
+    "dietitian": "Dietitian Workspace",
+    "admin": "Admin Control Center"
+  },
+  "states": {
+    "empty": "No data yet",
+    "noResults": "No matching results",
+    "loading": "Loading...",
+    "sessionCheck": "Checking your session...",
+    "workspaceLoading": "Loading your workspace...",
+    "appPreparing": "Preparing application..."
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "createAccount": "Create account"
+  },
+  "pages": {
+    "meals": {
+      "description": "Create and manage meals, then review history by day and period."
+    },
+    "products": {
+      "description": "Search products and inspect nutrition values before adding them to meals."
+    },
+    "profile": {
+      "description": "Update your profile settings, language, and calorie goals."
+    },
+    "patients": {
+      "title": "Patients",
+      "description": "Browse your patients and open each profile for detailed nutrition analysis."
+    },
+    "forbidden": {
+      "title": "Access denied",
+      "description": "You are authenticated, but your role does not allow this page."
+    },
+    "blocked": {
+      "title": "Account inactive",
+      "description": "Your account is currently inactive. Please contact support or your administrator."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you requested does not exist."
+    }
+  }
+}

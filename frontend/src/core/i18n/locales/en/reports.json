@@ -1,0 +1,9 @@
+{
+  "title": "Reports",
+  "description": "Upload and manage your personal health reports.",
+  "createTitle": "Upload report",
+  "fileUrl": "File URL",
+  "addAction": "Add report",
+  "empty": "No reports uploaded",
+  "emptyDescription": "Add a file URL to create your first report."
+}

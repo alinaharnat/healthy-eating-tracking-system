@@ -1,0 +1,5 @@
+{
+  "requiredField": "{{field}} is required",
+  "invalidEmail": "Please enter a valid email",
+  "minLength": "{{field}} must be at least {{count}} characters"
+}
