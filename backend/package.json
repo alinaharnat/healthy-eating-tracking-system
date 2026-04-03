@@ -5,7 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node database/seeders/runSeeds.js",
+    "reset:seed": "node database/seeders/runSeeds.js"
   },
   "keywords": [],
   "author": "",
