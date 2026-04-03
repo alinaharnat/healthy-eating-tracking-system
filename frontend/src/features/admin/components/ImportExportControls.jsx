@@ -1,13 +1,6 @@
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, Card, CardContent, Stack, Typography } from "@mui/material";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -16,8 +9,6 @@ function ImportExportControls({
   onImport,
   isExporting,
   isImporting,
-  error,
-  successMessage,
 }) {
   const { t } = useTranslation("admin");
   const inputRef = useRef(null);
@@ -51,12 +42,6 @@ function ImportExportControls({
               {t("backup.controlsDescription")}
             </Typography>
           </Stack>
-
-          {error ? <Alert severity="error">{error.message}</Alert> : null}
-          {successMessage ? (
-            <Alert severity="success">{successMessage}</Alert>
-          ) : null}
-
           <Stack direction={{ xs: "column", sm: "row" }} spacing={1}>
             <Button
               variant="contained"

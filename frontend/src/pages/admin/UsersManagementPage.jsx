@@ -1,13 +1,16 @@
-import { Alert, Stack, TextField } from "@mui/material";
-import { useMemo, useState } from "react";
+import { Stack } from "@mui/material";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useLocale } from "../../core/i18n/useLocale";
+import AdminSearchField from "../../features/admin/components/AdminSearchField";
 import ConfirmationDialog from "../../features/admin/components/ConfirmationDialog";
 import RoleChangeDialog from "../../features/admin/components/RoleChangeDialog";
 import UsersTable from "../../features/admin/components/UsersTable";
 import { useAdminUsersManagement } from "../../features/admin/hooks/useAdminUsersManagement";
-import { useLocale } from "../../core/i18n/useLocale";
+import { getLocalizedApiErrorMessage } from "../../shared/lib/errors/getLocalizedApiErrorMessage";
 import { sortByLocale } from "../../shared/lib/sort/localeSort";
+import { useNotification } from "../../shared/ui/notifications/useNotification";
 import { PATHS } from "../../router/paths";
 import PageHeaderCard from "../../shared/ui/PageHeaderCard";
 
@@ -15,6 +18,7 @@ function UsersManagementPage() {
   const { t } = useTranslation(["admin", "common"]);
   const { language } = useLocale();
   const navigate = useNavigate();
+  const { notify } = useNotification();
 
   const {
     users,
@@ -24,8 +28,8 @@ function UsersManagementPage() {
     updateRole,
     block,
     unblock,
-    successMessage,
-    clearSuccessMessage,
+    successKey,
+    clearSuccessKey,
     mutationError,
     isMutating,
   } = useAdminUsersManagement();
@@ -53,6 +57,31 @@ function UsersManagementPage() {
     navigate(PATHS.admin.userActivity(user.id));
   };
 
+  useEffect(() => {
+    if (!successKey) {
+      return;
+    }
+
+    notify({
+      key: successKey,
+      namespace: "admin",
+      severity: "success",
+    });
+
+    clearSuccessKey();
+  }, [clearSuccessKey, notify, successKey]);
+
+  useEffect(() => {
+    if (!mutationError) {
+      return;
+    }
+
+    notify({
+      message: getLocalizedApiErrorMessage(mutationError, t),
+      severity: "error",
+    });
+  }, [mutationError, notify, t]);
+
   const handleConfirmStatusAction = async () => {
     if (!pendingStatusAction?.user?.id) {
       return;
@@ -74,22 +103,10 @@ function UsersManagementPage() {
         description={t("users.description")}
       />
 
-      {successMessage ? (
-        <Alert severity="success" onClose={clearSuccessMessage}>
-          {successMessage}
-        </Alert>
-      ) : null}
-
-      {mutationError ? (
-        <Alert severity="error">{mutationError.message}</Alert>
-      ) : null}
-
-      <TextField
+      <AdminSearchField
         value={search}
         onChange={(event) => setSearch(event.target.value)}
         label={t("users.search")}
-        size="small"
-        sx={{ maxWidth: 320 }}
       />
 
       <UsersTable

@@ -7,6 +7,7 @@ const initialState = {
   open: false,
   severity: "info",
   messageKey: "",
+  message: "",
   values: undefined,
   namespace: "notifications",
 };
@@ -20,6 +21,7 @@ function NotificationProvider({ children }) {
 
   const notify = ({
     key,
+    message,
     severity = "info",
     values,
     namespace = "notifications",
@@ -28,6 +30,7 @@ function NotificationProvider({ children }) {
       open: true,
       severity,
       messageKey: key,
+      message: message || "",
       values,
       namespace,
     });
@@ -46,7 +49,7 @@ function NotificationProvider({ children }) {
         ns: state.namespace,
         ...state.values,
       })
-    : "";
+    : state.message;
 
   return (
     <NotificationContext.Provider value={contextValue}>

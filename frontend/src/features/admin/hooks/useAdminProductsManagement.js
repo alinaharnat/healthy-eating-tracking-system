@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import i18n from "../../../core/i18n/i18n";
 import { useApiRequest } from "../../../shared/hooks/useApiRequest";
-import { searchProducts } from "../../products/api";
+import { createProduct, searchProducts } from "../../products/api";
 import { deleteProductAdmin, updateProductAdmin } from "../api";
 
 export function useAdminProductsManagement() {
   const [search, setSearch] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [successKey, setSuccessKey] = useState("");
 
   // Assumption: regular product search endpoint is available to admin role for listing.
   const productsRequest = useApiRequest(
@@ -25,6 +24,13 @@ export function useAdminProductsManagement() {
     },
   );
 
+  const createRequest = useApiRequest(
+    ({ payload, signal }) => createProduct(payload, { signal }),
+    {
+      manual: true,
+    },
+  );
+
   const deleteRequest = useApiRequest(
     ({ productId, signal }) => deleteProductAdmin(productId, { signal }),
     {
@@ -33,6 +39,7 @@ export function useAdminProductsManagement() {
   );
 
   const productsRun = productsRequest.run;
+  const createRun = createRequest.run;
   const updateRun = updateRequest.run;
   const deleteRun = deleteRequest.run;
 
@@ -50,12 +57,20 @@ export function useAdminProductsManagement() {
     await productsRun({ query: search.trim() });
   }, [productsRun, search]);
 
+  const addProduct = useCallback(
+    async (payload) => {
+      const result = await createRun({ payload });
+      setSuccessKey("feedback.productCreated");
+      await reload();
+      return result;
+    },
+    [createRun, reload],
+  );
+
   const updateProduct = useCallback(
     async ({ productId, payload }) => {
       const result = await updateRun({ productId, payload });
-      setSuccessMessage(
-        result?.message || i18n.t("admin:feedback.productUpdated"),
-      );
+      setSuccessKey("feedback.productUpdated");
       await reload();
       return result;
     },
@@ -65,9 +80,7 @@ export function useAdminProductsManagement() {
   const removeProduct = useCallback(
     async (productId) => {
       const result = await deleteRun({ productId });
-      setSuccessMessage(
-        result?.message || i18n.t("admin:feedback.productDeleted"),
-      );
+      setSuccessKey("feedback.productDeleted");
       await reload();
       return result;
     },
@@ -87,11 +100,16 @@ export function useAdminProductsManagement() {
     error: productsRequest.error,
     retry: productsRequest.retry,
     reload,
+    addProduct,
     updateProduct,
     removeProduct,
-    mutationError: updateRequest.error || deleteRequest.error || null,
-    isMutating: updateRequest.isLoading || deleteRequest.isLoading,
-    successMessage,
-    clearSuccessMessage: () => setSuccessMessage(""),
+    mutationError:
+      createRequest.error || updateRequest.error || deleteRequest.error || null,
+    isMutating:
+      createRequest.isLoading ||
+      updateRequest.isLoading ||
+      deleteRequest.isLoading,
+    successKey,
+    clearSuccessKey: () => setSuccessKey(""),
   };
 }

@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import i18n from "../../../core/i18n/i18n";
 import { useApiRequest } from "../../../shared/hooks/useApiRequest";
 import { exportDatabase, importDatabase } from "../api";
 
@@ -15,8 +14,8 @@ function downloadJsonFile(data, filename) {
 }
 
 export function useAdminBackupData() {
-  const [successMessage, setSuccessMessage] = useState("");
-  const [fileError, setFileError] = useState(null);
+  const [successKey, setSuccessKey] = useState("");
+  const [fileErrorKey, setFileErrorKey] = useState("");
 
   const exportRequest = useApiRequest(
     ({ signal }) => exportDatabase({ signal }),
@@ -37,16 +36,16 @@ export function useAdminBackupData() {
   const importRun = importRequest.run;
 
   const handleExport = useCallback(async () => {
-    setFileError(null);
+    setFileErrorKey("");
     const data = await exportRun({});
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
     downloadJsonFile(data, `macro-backup-${timestamp}.json`);
-    setSuccessMessage(i18n.t("admin:feedback.backupExported"));
+    setSuccessKey("feedback.backupExported");
   }, [exportRun]);
 
   const handleImport = useCallback(
     async (file) => {
-      setFileError(null);
+      setFileErrorKey("");
 
       const text = await file.text();
       let payload;
@@ -54,15 +53,12 @@ export function useAdminBackupData() {
       try {
         payload = JSON.parse(text);
       } catch {
-        const message = i18n.t("admin:feedback.invalidJsonFile");
-        setFileError(new Error(message));
-        throw new Error(message);
+        setFileErrorKey("feedback.invalidJsonFile");
+        throw new Error("Invalid JSON file format");
       }
 
       const response = await importRun({ payload });
-      setSuccessMessage(
-        response?.message || i18n.t("admin:feedback.importCompleted"),
-      );
+      setSuccessKey("feedback.importCompleted");
       return response;
     },
     [importRun],
@@ -73,8 +69,10 @@ export function useAdminBackupData() {
     handleImport,
     isExporting: exportRequest.isLoading,
     isImporting: importRequest.isLoading,
-    error: fileError || exportRequest.error || importRequest.error || null,
-    successMessage,
-    clearSuccessMessage: () => setSuccessMessage(""),
+    error: exportRequest.error || importRequest.error || null,
+    fileErrorKey,
+    clearFileErrorKey: () => setFileErrorKey(""),
+    successKey,
+    clearSuccessKey: () => setSuccessKey(""),
   };
 }

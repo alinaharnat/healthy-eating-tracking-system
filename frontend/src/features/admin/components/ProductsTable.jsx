@@ -9,13 +9,14 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { getLocalizedApiErrorMessage } from "../../../shared/lib/errors/getLocalizedApiErrorMessage";
 import EmptyStateCard from "../../../shared/ui/states/EmptyStateCard";
 import SectionErrorState from "../../../shared/ui/states/SectionErrorState";
 import SectionLoadingState from "../../../shared/ui/states/SectionLoadingState";
+import AdminSearchField from "./AdminSearchField";
 
 function ProductsTable({
   products,
@@ -33,7 +34,7 @@ function ProductsTable({
   if (error) {
     return (
       <SectionErrorState
-        message={error.message}
+        message={getLocalizedApiErrorMessage(error, t)}
         onRetry={onRetry}
         retryLabel={t("common:actions.retry")}
       />
@@ -42,12 +43,10 @@ function ProductsTable({
 
   return (
     <Stack spacing={1.5}>
-      <TextField
+      <AdminSearchField
         value={search}
         onChange={(event) => onSearchChange(event.target.value)}
         label={t("products.search")}
-        size="small"
-        sx={{ maxWidth: 320 }}
       />
 
       {isLoading ? (

@@ -1,10 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
-import i18n from "../../../core/i18n/i18n";
 import { useApiRequest } from "../../../shared/hooks/useApiRequest";
 import { blockUser, changeUserRole, getAllUsers, unblockUser } from "../api";
 
 export function useAdminUsersManagement() {
-  const [successMessage, setSuccessMessage] = useState("");
+  const [successKey, setSuccessKey] = useState("");
 
   const usersRequest = useApiRequest(({ signal }) => getAllUsers({ signal }), {
     manual: false,
@@ -38,9 +37,7 @@ export function useAdminUsersManagement() {
   const updateRole = useCallback(
     async ({ userId, role }) => {
       const result = await roleRun({ userId, role });
-      setSuccessMessage(
-        result?.message || i18n.t("admin:feedback.roleUpdated"),
-      );
+      setSuccessKey("feedback.roleUpdated");
       await reload();
       return result;
     },
@@ -50,9 +47,7 @@ export function useAdminUsersManagement() {
   const block = useCallback(
     async (userId) => {
       const result = await blockRun({ userId });
-      setSuccessMessage(
-        result?.message || i18n.t("admin:feedback.userBlocked"),
-      );
+      setSuccessKey("feedback.userBlocked");
       await reload();
       return result;
     },
@@ -62,9 +57,7 @@ export function useAdminUsersManagement() {
   const unblock = useCallback(
     async (userId) => {
       const result = await unblockRun({ userId });
-      setSuccessMessage(
-        result?.message || i18n.t("admin:feedback.userUnblocked"),
-      );
+      setSuccessKey("feedback.userUnblocked");
       await reload();
       return result;
     },
@@ -82,8 +75,8 @@ export function useAdminUsersManagement() {
     updateRole,
     block,
     unblock,
-    successMessage,
-    clearSuccessMessage: () => setSuccessMessage(""),
+    successKey,
+    clearSuccessKey: () => setSuccessKey(""),
     mutationError:
       roleRequest.error || blockRequest.error || unblockRequest.error || null,
     isMutating:

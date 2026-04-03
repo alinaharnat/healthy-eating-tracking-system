@@ -13,6 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { getLocalizedApiErrorMessage } from "../../../shared/lib/errors/getLocalizedApiErrorMessage";
 import EmptyStateCard from "../../../shared/ui/states/EmptyStateCard";
 import SectionErrorState from "../../../shared/ui/states/SectionErrorState";
 import SectionLoadingState from "../../../shared/ui/states/SectionLoadingState";
@@ -34,7 +35,7 @@ function UsersTable({
   if (error) {
     return (
       <SectionErrorState
-        message={error.message}
+        message={getLocalizedApiErrorMessage(error, t)}
         onRetry={onRetry}
         retryLabel={t("common:actions.retry")}
       />

@@ -3,6 +3,17 @@
     "loginFailed": "Sign in failed. {{reason}}",
     "registerFailed": "Registration failed. {{reason}}"
   },
+  "errors": {
+    "badRequest": "Invalid request data.",
+    "unauthorized": "Please sign in again.",
+    "forbidden": "You do not have permission for this action.",
+    "notFound": "Requested resource was not found.",
+    "conflict": "The action conflicts with existing data.",
+    "server": "Server is temporarily unavailable.",
+    "network": "Network connection error.",
+    "cancelled": "Request was cancelled.",
+    "requestFailed": "Request failed. Please try again."
+  },
   "unknownError": "Please try again.",
   "languageChanged": "Language changed successfully",
   "sampleDashboard": "You are viewing translated notifications"

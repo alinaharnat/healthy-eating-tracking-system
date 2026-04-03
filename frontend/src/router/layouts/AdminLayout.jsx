@@ -83,7 +83,7 @@ function AdminLayout() {
               {user?.email || ""}
             </Typography>
           </Box>
-          <LanguageSwitcher minWidth={132} />
+          <LanguageSwitcher minWidth={132} colorVariant="white" />
           <Button
             color="inherit"
             startIcon={<LogoutIcon />}

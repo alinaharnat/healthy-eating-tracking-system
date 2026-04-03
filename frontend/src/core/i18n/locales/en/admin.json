@@ -77,7 +77,7 @@
   },
   "products": {
     "title": "Products Management",
-    "description": "Edit or delete product records with admin privileges.",
+    "description": "Create, edit, or delete product records with admin privileges.",
     "search": "Search product",
     "emptyTitle": "No products found",
     "emptyDescription": "Try a different search query.",
@@ -90,9 +90,19 @@
       "actions": "Actions"
     },
     "dialogs": {
+      "createTitle": "Add product",
       "editTitle": "Edit product",
       "deleteTitle": "Delete product?",
       "deleteDescription": "Product {{name}} will be removed permanently."
+    },
+    "actions": {
+      "add": "Add product"
+    },
+    "validation": {
+      "nameRequired": "Product name is required",
+      "invalidNumeric": "Calories and macros must be valid numbers",
+      "caloriesPositive": "Calories must be greater than zero",
+      "macrosNonNegative": "Proteins, fats, and carbs cannot be negative"
     }
   },
   "statistics": {
@@ -132,6 +142,7 @@
     "roleUpdated": "Role updated",
     "userBlocked": "User blocked",
     "userUnblocked": "User unblocked",
+    "productCreated": "Product created",
     "productUpdated": "Product updated",
     "productDeleted": "Product deleted",
     "backupExported": "Backup exported successfully",

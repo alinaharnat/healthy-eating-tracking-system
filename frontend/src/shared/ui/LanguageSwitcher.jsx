@@ -4,7 +4,33 @@ import { useTranslation } from "react-i18next";
 import { useLocale } from "../../core/i18n/useLocale";
 import { useNotification } from "./notifications/useNotification";
 
-function LanguageSwitcher({ size = "small", minWidth = 140 }) {
+const WHITE_VARIANT_SX = {
+  "& .MuiOutlinedInput-root": {
+    bgcolor: "common.white",
+    "& fieldset": {
+      borderColor: "rgba(15, 23, 42, 0.28)",
+    },
+    "&:hover fieldset": {
+      borderColor: "rgba(15, 23, 42, 0.48)",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "primary.main",
+      borderWidth: 1,
+    },
+  },
+  "& .MuiInputBase-input": {
+    color: "text.primary",
+  },
+  "& .MuiInputLabel-root": {
+    color: "text.secondary",
+  },
+};
+
+function LanguageSwitcher({
+  size = "small",
+  minWidth = 140,
+  colorVariant = "default",
+}) {
   const { t } = useTranslation("common");
   const { language, setLanguage } = useLocale();
   const { notify } = useNotification();
@@ -21,7 +47,14 @@ function LanguageSwitcher({ size = "small", minWidth = 140 }) {
   };
 
   return (
-    <FormControl size={size} sx={{ minWidth }}>
+    <FormControl
+      size={size}
+      sx={
+        colorVariant === "white"
+          ? { minWidth, ...WHITE_VARIANT_SX }
+          : { minWidth }
+      }
+    >
       <InputLabel id={labelId}>
         <TranslateIcon
           sx={{ fontSize: 18, verticalAlign: "middle", mr: 0.5 }}
