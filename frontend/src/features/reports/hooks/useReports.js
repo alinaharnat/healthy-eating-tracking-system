@@ -22,24 +22,28 @@ export function useReports() {
     },
   );
 
+  const listRun = listRequest.run;
+  const createRun = createRequest.run;
+  const deleteRun = deleteRequest.run;
+
   const reload = useCallback(async () => {
-    await listRequest.run({});
-  }, [listRequest]);
+    await listRun({});
+  }, [listRun]);
 
   const addReport = useCallback(
     async (payload) => {
-      await createRequest.run({ payload });
+      await createRun({ payload });
       await reload();
     },
-    [createRequest, reload],
+    [createRun, reload],
   );
 
   const removeReport = useCallback(
     async (reportId) => {
-      await deleteRequest.run({ reportId });
+      await deleteRun({ reportId });
       await reload();
     },
-    [deleteRequest, reload],
+    [deleteRun, reload],
   );
 
   return {

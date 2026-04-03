@@ -31,6 +31,12 @@ function unwrapPayload(payload) {
   return payload;
 }
 
+function joinUrl(baseUrl, path) {
+  const normalizedBase = String(baseUrl || "").replace(/\/+$/, "");
+  const normalizedPath = String(path || "").replace(/^\/+/, "");
+  return `${normalizedBase}/${normalizedPath}`;
+}
+
 export function createApiClient({ baseUrl, getAuthToken }) {
   let unauthorizedHandler = null;
 
@@ -55,7 +61,7 @@ export function createApiClient({ baseUrl, getAuthToken }) {
       token,
     } = options;
 
-    const url = `${baseUrl}${path}${buildQueryString(query)}`;
+    const url = `${joinUrl(baseUrl, path)}${buildQueryString(query)}`;
 
     const requestHeaders = {
       Accept: "application/json",

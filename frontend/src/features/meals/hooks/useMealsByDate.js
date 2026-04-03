@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { deleteMeal, getMealsByDate } from "../api";
 import { useApiRequest } from "../../../shared/hooks/useApiRequest";
 import { useOptimisticList } from "../../../shared/hooks/useOptimisticList";
@@ -19,20 +19,38 @@ export function useMealsByDate(initialDate = null) {
         },
       ),
     {
-      manual: !initialDate,
+      manual: true,
       retries: 1,
-      immediateParams: initialDate ? { date: initialDate } : undefined,
     },
   );
 
+  const mealsRun = mealsRequest.run;
+
   const loadMeals = useCallback(
     async (date) => {
-      const result = await mealsRequest.run({ date });
-      setMeals(result);
-      return result;
+      const result = await mealsRun({ date });
+      const safeResult = result || [];
+      setMeals(safeResult);
+      return safeResult;
     },
-    [mealsRequest, setMeals],
+    [mealsRun, setMeals],
   );
+
+  useEffect(() => {
+    if (!initialDate) {
+      return;
+    }
+
+    loadMeals(initialDate).catch(() => null);
+  }, [initialDate, loadMeals]);
+
+  const retry = useCallback(() => {
+    if (!initialDate) {
+      return Promise.resolve([]);
+    }
+
+    return loadMeals(initialDate);
+  }, [initialDate, loadMeals]);
 
   const deleteMealOptimistic = useCallback(
     async (mealId) => {
@@ -52,7 +70,7 @@ export function useMealsByDate(initialDate = null) {
     deleteMealOptimistic,
     isLoading: mealsRequest.isLoading,
     error: mealsRequest.error,
-    retry: mealsRequest.retry,
+    retry,
     cancel: mealsRequest.cancel,
   };
 }

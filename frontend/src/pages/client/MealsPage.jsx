@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   addProductToMeal,
@@ -73,10 +73,6 @@ function MealsPage() {
       manual: true,
     },
   );
-
-  useEffect(() => {
-    loadMeals(selectedDate).catch(() => null);
-  }, [loadMeals, selectedDate]);
 
   const isMutating =
     createRequest.isLoading ||

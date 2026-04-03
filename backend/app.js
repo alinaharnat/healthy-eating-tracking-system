@@ -10,6 +10,8 @@ import productRoutes from "./routes/product.routes.js";
 import recommendationRoutes from "./routes/recommendation.routes.js";
 import iotRoutes from "./routes/iot.routes.js";
 import reportRoutes from "./routes/report.routes.js";
+import analyticsRoutes from "./routes/analytics.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
 
 const app = express();
 
@@ -17,7 +19,7 @@ app.use(
   cors({
     origin: process.env.ALLOWED_ORIGINS?.split(",") || "*",
     credentials: true,
-  })
+  }),
 );
 
 app.use(express.json());
@@ -42,6 +44,8 @@ app.use("/api/products", productRoutes);
 app.use("/api/recommendations", recommendationRoutes);
 app.use("/api/iot-measurements", iotRoutes);
 app.use("/api/reports", reportRoutes);
+app.use("/api/analytics", analyticsRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Test route
 app.get("/", (req, res) => {

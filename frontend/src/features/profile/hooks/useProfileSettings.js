@@ -15,13 +15,16 @@ export function useProfileSettings() {
     },
   );
 
+  const profileRun = profileRequest.run;
+  const saveRun = saveRequest.run;
+
   const saveProfile = useCallback(
     async (payload) => {
-      const updatedProfile = await saveRequest.run({ payload });
-      await profileRequest.run({});
+      const updatedProfile = await saveRun({ payload });
+      await profileRun({});
       return updatedProfile;
     },
-    [profileRequest, saveRequest],
+    [profileRun, saveRun],
   );
 
   return {

@@ -27,7 +27,7 @@ export function useActivityPageData(initialPeriod = "week") {
   const measurementsRequest = useApiRequest(
     ({ signal }) => getLatestMeasurements({ signal }),
     {
-      manual: false,
+      manual: true,
       retries: 1,
     },
   );
@@ -54,6 +54,10 @@ export function useActivityPageData(initialPeriod = "week") {
   useEffect(() => {
     summaryRun({ nextPeriod: period }).catch(() => null);
   }, [period, summaryRun]);
+
+  useEffect(() => {
+    measurementsRun({}).catch(() => null);
+  }, [measurementsRun]);
 
   const reloadAll = useCallback(async () => {
     await Promise.all([

@@ -34,6 +34,8 @@ function ProductSearchDialog({ open, onClose, onConfirm }) {
     },
   );
 
+  const searchRun = searchRequest.run;
+
   useEffect(() => {
     if (!open) {
       return;
@@ -44,13 +46,13 @@ function ProductSearchDialog({ open, onClose, onConfirm }) {
     }
 
     const timeoutId = window.setTimeout(() => {
-      searchRequest.run({ search: query.trim() }).catch(() => null);
+      searchRun({ search: query.trim() }).catch(() => null);
     }, 300);
 
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [open, query, searchRequest]);
+  }, [open, query, searchRun]);
 
   const options = useMemo(() => searchRequest.data || [], [searchRequest.data]);
 

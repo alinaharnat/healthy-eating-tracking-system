@@ -11,6 +11,25 @@ const INITIAL_STATE = {
   isLoading: false,
 };
 
+function stableSerialize(value) {
+  if (value === null || value === undefined) {
+    return String(value);
+  }
+
+  if (typeof value !== "object") {
+    return JSON.stringify(value);
+  }
+
+  if (Array.isArray(value)) {
+    return `[${value.map((item) => stableSerialize(item)).join(",")}]`;
+  }
+
+  const keys = Object.keys(value).sort();
+  return `{${keys
+    .map((key) => `${JSON.stringify(key)}:${stableSerialize(value[key])}`)
+    .join(",")}}`;
+}
+
 export function useApiRequest(requestFn, options = {}) {
   const {
     manual = true,
@@ -23,16 +42,19 @@ export function useApiRequest(requestFn, options = {}) {
   const requestControllerRef = useRef(null);
   const requestFnRef = useRef(requestFn);
   const lastParamsRef = useRef(immediateParams || {});
+  const isMountedRef = useRef(true);
+  const runIdRef = useRef(0);
+  const immediateParamsKey = stableSerialize(immediateParams || {});
 
   useEffect(() => {
     requestFnRef.current = requestFn;
   }, [requestFn]);
 
   useEffect(() => {
-    if (immediateParams) {
+    if (immediateParams !== undefined) {
       lastParamsRef.current = immediateParams;
     }
-  }, [immediateParams]);
+  }, [immediateParams, immediateParamsKey]);
 
   const cancel = useCallback(() => {
     requestControllerRef.current?.cancel();
@@ -43,15 +65,20 @@ export function useApiRequest(requestFn, options = {}) {
     async (params = {}) => {
       cancel();
 
+      const runId = runIdRef.current + 1;
+      runIdRef.current = runId;
+
       const requestController = createRequestController();
       requestControllerRef.current = requestController;
       lastParamsRef.current = params;
 
-      setState((prev) => ({
-        ...prev,
-        isLoading: true,
-        error: null,
-      }));
+      if (isMountedRef.current) {
+        setState((prev) => ({
+          ...prev,
+          isLoading: true,
+          error: null,
+        }));
+      }
 
       try {
         const data = await withRetry(
@@ -66,17 +93,23 @@ export function useApiRequest(requestFn, options = {}) {
           },
         );
 
-        setState({
-          data,
-          error: null,
-          isLoading: false,
-        });
+        if (isMountedRef.current && runId === runIdRef.current) {
+          setState({
+            data,
+            error: null,
+            isLoading: false,
+          });
+        }
 
         return data;
       } catch (error) {
         const normalizedError = normalizeApiError(error);
 
-        if (!normalizedError.isCanceled) {
+        if (
+          isMountedRef.current &&
+          runId === runIdRef.current &&
+          !normalizedError.isCanceled
+        ) {
           setState((prev) => ({
             ...prev,
             error: normalizedError,
@@ -93,6 +126,15 @@ export function useApiRequest(requestFn, options = {}) {
   const retry = useCallback(() => run(lastParamsRef.current || {}), [run]);
 
   useEffect(() => {
+    isMountedRef.current = true;
+
+    return () => {
+      isMountedRef.current = false;
+      cancel();
+    };
+  }, [cancel]);
+
+  useEffect(() => {
     let timeoutId = null;
 
     if (!manual) {
@@ -106,9 +148,11 @@ export function useApiRequest(requestFn, options = {}) {
         window.clearTimeout(timeoutId);
       }
 
-      cancel();
+      if (!manual) {
+        cancel();
+      }
     };
-  }, [cancel, manual, run]);
+  }, [cancel, manual, run, immediateParamsKey]);
 
   return {
     ...state,
