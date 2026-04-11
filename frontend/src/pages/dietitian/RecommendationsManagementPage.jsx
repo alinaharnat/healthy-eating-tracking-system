@@ -14,12 +14,14 @@ import RecommendationTimelineList from "../../features/dietitian/components/Reco
 import { useDietitianPatients } from "../../features/dietitian/hooks/useDietitianPatients";
 import { useDietitianRecommendations } from "../../features/dietitian/hooks/useDietitianRecommendations";
 import { PATHS } from "../../router/paths";
+import { useNotification } from "../../shared/ui/notifications/useNotification";
 import SectionErrorState from "../../shared/ui/states/SectionErrorState";
 import SectionLoadingState from "../../shared/ui/states/SectionLoadingState";
 
 function RecommendationsManagementPage() {
   const { t } = useTranslation(["dietitian", "common"]);
   const navigate = useNavigate();
+  const { notify } = useNotification();
   const [selectedPatientId, setSelectedPatientId] = useState("");
 
   const {
@@ -35,6 +37,9 @@ function RecommendationsManagementPage() {
     error: recommendationsError,
     retry: retryRecommendations,
     removeRecommendation,
+    editRecommendation,
+    deleteError,
+    updateError,
     isMutating,
   } = useDietitianRecommendations({ patientId: selectedPatientId || null });
 
@@ -44,6 +49,24 @@ function RecommendationsManagementPage() {
       return acc;
     }, {});
   }, [patients]);
+
+  const handleDeleteRecommendation = async (recommendationId) => {
+    await removeRecommendation(recommendationId);
+    notify({
+      severity: "success",
+      key: "dietitian.recommendations.notifications.deleted",
+      namespace: "dietitian",
+    });
+  };
+
+  const handleEditRecommendation = async (recommendationId, payload) => {
+    await editRecommendation(recommendationId, payload);
+    notify({
+      severity: "success",
+      key: "dietitian.recommendations.notifications.updated",
+      namespace: "dietitian",
+    });
+  };
 
   if (patientsError) {
     return (
@@ -109,8 +132,10 @@ function RecommendationsManagementPage() {
         isLoading={recommendationsLoading}
         error={recommendationsError}
         onRetry={retryRecommendations}
-        onDelete={removeRecommendation}
+        onDelete={handleDeleteRecommendation}
+        onEdit={handleEditRecommendation}
         isMutating={isMutating}
+        mutationError={deleteError || updateError}
         emptyTitle={t("management.emptyTitle")}
         emptyDescription={t("management.emptyDescription")}
       />

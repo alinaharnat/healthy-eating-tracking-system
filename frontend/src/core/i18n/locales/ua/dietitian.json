@@ -3,13 +3,16 @@
     "dashboard": "Панель",
     "patients": "Пацієнти",
     "recommendations": "Історія рекомендацій",
-    "createRecommendation": "Нова рекомендація"
+    "createRecommendation": "Нова рекомендація",
+    "assignmentRequests": "Запити на призначення"
   },
   "actions": {
     "open": "Відкрити",
     "recommend": "Рекомендувати",
     "createRecommendation": "Створити рекомендацію",
+    "update": "Оновити",
     "viewPatients": "Переглянути пацієнтів",
+    "viewRequests": "Переглянути запити",
     "retry": "Спробувати знову",
     "backToPatients": "Назад до пацієнтів",
     "backToHistory": "Назад до історії",
@@ -48,12 +51,19 @@
       "active": "Активний",
       "inactive": "Неактивний"
     },
+    "removeAction": "Відкріпити",
+    "removeDialogTitle": "Відкріпити пацієнта?",
+    "removeDialogDescription": "Пацієнта {{name}} буде видалено з вашого активного списку.",
+    "removeDialogHint": "Обліковий запис користувача залишиться в системі та може бути призначений повторно.",
     "emptyTitle": "Немає призначених пацієнтів",
-    "emptyDescription": "У вас ще немає призначених пацієнтів."
+    "emptyDescription": "У вас ще немає призначених пацієнтів.",
+    "notifications": {
+      "unassigned": "Пацієнта успішно відкріплено"
+    }
   },
   "patientDetails": {
     "title": "Деталі пацієнта",
-    "description": "Профіль у режимі читання та історія рекомендацій для цього пацієнта.",
+    "description": "Профіль пацієнта, огляд прогресу та історія рекомендацій.",
     "fields": {
       "goal": "Тип цілі",
       "dailyGoal": "Добова ціль калорій",
@@ -61,8 +71,8 @@
       "weight": "Вага"
     },
     "notAvailable": "Немає даних",
-    "readOnlyTitle": "Огляд харчування та активності",
-    "readOnlyDescription": "Дані в режимі читання базуються на доступному профілі. Для додаткової аналітики активності потрібен окремий endpoint бекенду.",
+    "overviewTitle": "Огляд харчування та активності",
+    "overviewDescription": "Добова нутрітивна статистика, тренди та показники активності пацієнта.",
     "timelineTitle": "Історія рекомендацій",
     "emptyRecommendationsTitle": "Для цього пацієнта немає рекомендацій",
     "emptyRecommendationsDescription": "Створіть рекомендацію, щоб розпочати історію.",
@@ -86,6 +96,8 @@
   "form": {
     "title": "Форма рекомендації",
     "description": "Надавайте короткі та конкретні поради відповідно до цілей пацієнта.",
+    "editTitle": "Редагування рекомендації",
+    "editDescription": "Оновіть текст рекомендації без зміни прив'язки до пацієнта.",
     "patient": "Пацієнт",
     "message": "Рекомендація",
     "messagePlaceholder": "Наприклад: збільшити споживання білка на сніданок і додати 20-хвилинну вечірню прогулянку.",
@@ -98,6 +110,52 @@
     "emptyDescription": "Створіть рекомендацію, щоб заповнити цю стрічку.",
     "unknownPatient": "Невідомий пацієнт",
     "deleteDialogTitle": "Видалити рекомендацію?",
-    "deleteDialogDescription": "Цю дію неможливо скасувати."
+    "deleteDialogDescription": "Цю дію неможливо скасувати.",
+    "editDialogTitle": "Редагувати рекомендацію",
+    "editDialogDescription": "Оновіть поради та збережіть зміни."
+  },
+  "overview": {
+    "dailyCalories": "Добові калорії",
+    "proteins": "Білки",
+    "fats": "Жири",
+    "carbs": "Вуглеводи",
+    "calorieGoal": "Ціль калорій",
+    "steps": "Кроки",
+    "burnedCalories": "Спалені калорії",
+    "latestWeight": "Остання вага",
+    "weeklyTrend": "Тижневий тренд харчування",
+    "monthlyTrend": "Місячний тренд харчування",
+    "averageCalories": "Середні калорії: {{value}} ккал"
+  },
+  "requests": {
+    "title": "Запити на призначення пацієнтів",
+    "description": "Переглядайте запити від клієнтів і безпечно приймайте або відхиляйте призначення.",
+    "pendingTitle": "Запити в очікуванні",
+    "recentTitle": "Нещодавно опрацьовані",
+    "emptyPendingTitle": "Немає запитів в очікуванні",
+    "emptyPendingDescription": "Нові запити від клієнтів з'являться тут.",
+    "emptyRecentTitle": "Ще немає опрацьованих запитів",
+    "emptyRecentDescription": "Прийняті та відхилені запити відображатимуться тут.",
+    "status": {
+      "pending": "Очікує",
+      "accepted": "Прийнято",
+      "rejected": "Відхилено",
+      "cancelled": "Скасовано"
+    },
+    "actions": {
+      "accept": "Прийняти",
+      "reject": "Відхилити"
+    },
+    "notifications": {
+      "accepted": "Запит прийнято, пацієнта призначено",
+      "rejected": "Запит відхилено"
+    }
+  },
+  "recommendations": {
+    "notifications": {
+      "created": "Рекомендацію створено",
+      "updated": "Рекомендацію оновлено",
+      "deleted": "Рекомендацію видалено"
+    }
   }
 }

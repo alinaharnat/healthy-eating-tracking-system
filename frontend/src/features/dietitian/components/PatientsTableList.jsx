@@ -1,5 +1,6 @@
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import PostAddIcon from "@mui/icons-material/PostAdd";
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import {
   Button,
   Chip,
@@ -39,6 +40,8 @@ function PatientsTableList({
   onRetry,
   onOpenPatient,
   onCreateRecommendation,
+  onUnassignPatient,
+  isMutating,
 }) {
   const { t } = useTranslation(["dietitian", "profile", "common"]);
 
@@ -121,8 +124,19 @@ function PatientsTableList({
                     variant="contained"
                     startIcon={<PostAddIcon />}
                     onClick={() => onCreateRecommendation(patient.id)}
+                    disabled={isMutating}
                   >
                     {t("dietitian:actions.recommend")}
+                  </Button>
+                  <Button
+                    size="small"
+                    color="error"
+                    variant="text"
+                    startIcon={<PersonRemoveIcon />}
+                    onClick={() => onUnassignPatient?.(patient.id)}
+                    disabled={isMutating}
+                  >
+                    {t("dietitian:patients.removeAction")}
                   </Button>
                 </Stack>
               </TableCell>

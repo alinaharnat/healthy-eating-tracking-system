@@ -6,6 +6,7 @@ import RecommendationForm from "../../features/dietitian/components/Recommendati
 import { useCreateRecommendation } from "../../features/dietitian/hooks/useCreateRecommendation";
 import { useDietitianPatients } from "../../features/dietitian/hooks/useDietitianPatients";
 import { PATHS } from "../../router/paths";
+import { useNotification } from "../../shared/ui/notifications/useNotification";
 import EmptyStateCard from "../../shared/ui/states/EmptyStateCard";
 import SectionErrorState from "../../shared/ui/states/SectionErrorState";
 import SectionLoadingState from "../../shared/ui/states/SectionLoadingState";
@@ -13,6 +14,7 @@ import SectionLoadingState from "../../shared/ui/states/SectionLoadingState";
 function CreateRecommendationPage() {
   const { t } = useTranslation(["dietitian", "common"]);
   const navigate = useNavigate();
+  const { notify } = useNotification();
   const [searchParams] = useSearchParams();
   const initialPatientId = searchParams.get("patientId") || "";
 
@@ -28,6 +30,11 @@ function CreateRecommendationPage() {
 
   const handleSubmit = async (payload) => {
     await createRecommendation(payload);
+    notify({
+      severity: "success",
+      key: "dietitian.recommendations.notifications.created",
+      namespace: "dietitian",
+    });
     navigate(PATHS.dietitian.recommendationsManagement);
   };
 

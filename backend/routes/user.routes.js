@@ -3,6 +3,12 @@ import {
   getMe,
   updateMe,
   listPatients,
+  unassignPatient,
+  listDietitians,
+  createDietitianRequest,
+  listOutgoingDietitianRequests,
+  listIncomingDietitianRequests,
+  respondDietitianRequest,
 } from "../controllers/user.controller.js";
 
 import { protect, authorize } from "../middleware/auth.middleware.js";
@@ -87,5 +93,47 @@ router.patch("/me", protect, updateMe);
  *         description: Список пацієнтів
  */
 router.get("/patients", protect, authorize("dietitian"), listPatients);
+
+router.delete(
+  "/patients/:patientId/assignment",
+  protect,
+  authorize("dietitian"),
+  unassignPatient,
+);
+
+router.get(
+  "/dietitians",
+  protect,
+  authorize("client", "admin"),
+  listDietitians,
+);
+
+router.post(
+  "/dietitian-requests",
+  protect,
+  authorize("client"),
+  createDietitianRequest,
+);
+
+router.get(
+  "/dietitian-requests/outgoing",
+  protect,
+  authorize("client"),
+  listOutgoingDietitianRequests,
+);
+
+router.get(
+  "/dietitian-requests/incoming",
+  protect,
+  authorize("dietitian"),
+  listIncomingDietitianRequests,
+);
+
+router.patch(
+  "/dietitian-requests/:requestId/respond",
+  protect,
+  authorize("dietitian"),
+  respondDietitianRequest,
+);
 
 export default router;

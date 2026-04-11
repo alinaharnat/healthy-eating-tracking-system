@@ -1,8 +1,15 @@
-import { listPatients } from "../../users/api";
+import { getNutritionAndActivityOverview } from "../../analytics/api";
+import {
+  listIncomingDietitianRequests,
+  listPatients,
+  respondDietitianRequest,
+  unassignPatient,
+} from "../../users/api";
 import {
   createRecommendation,
   deleteRecommendation,
   listMyRecommendations,
+  updateRecommendation,
 } from "../../recommendations/api";
 
 function sortByNewest(items = []) {
@@ -23,15 +30,14 @@ export async function listDietitianRecommendations(
   { patientId } = {},
   options = {},
 ) {
-  const recommendations = await listMyRecommendations(options);
-
-  if (!patientId) {
-    return sortByNewest(recommendations);
-  }
-
-  return sortByNewest(
-    recommendations.filter((item) => String(item.userId) === String(patientId)),
+  const recommendations = await listMyRecommendations(
+    {
+      userId: patientId || undefined,
+    },
+    options,
   );
+
+  return sortByNewest(recommendations);
 }
 
 export async function createRecommendationForPatient(payload, options = {}) {
@@ -56,4 +62,50 @@ export async function deleteDietitianRecommendation(
   options = {},
 ) {
   return deleteRecommendation(recommendationId, options);
+}
+
+export async function updateDietitianRecommendation(
+  recommendationId,
+  payload,
+  options = {},
+) {
+  const message = payload?.message?.trim();
+
+  if (!message) {
+    throw new Error("Recommendation message is required");
+  }
+
+  return updateRecommendation(
+    recommendationId,
+    {
+      message,
+    },
+    options,
+  );
+}
+
+export async function getDietitianPatientOverview(patientId, options = {}) {
+  return getNutritionAndActivityOverview(
+    {
+      userId: patientId,
+      activityPeriod: "week",
+    },
+    options,
+  );
+}
+
+export async function unassignDietitianPatient(patientId, options = {}) {
+  return unassignPatient(patientId, options);
+}
+
+export async function listPatientAssignmentRequests(options = {}) {
+  return listIncomingDietitianRequests({}, options);
+}
+
+export async function respondPatientAssignmentRequest(
+  requestId,
+  payload,
+  options = {},
+) {
+  return respondDietitianRequest(requestId, payload, options);
 }

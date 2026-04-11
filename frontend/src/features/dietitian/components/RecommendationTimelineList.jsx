@@ -1,5 +1,7 @@
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import {
+  Alert,
   Button,
   Card,
   CardContent,
@@ -9,6 +11,7 @@ import {
   DialogTitle,
   IconButton,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useMemo, useState } from "react";
@@ -26,17 +29,28 @@ function RecommendationTimelineList({
   error,
   onRetry,
   onDelete,
+  onEdit,
   isMutating,
+  mutationError,
   emptyTitle,
   emptyDescription,
 }) {
   const { t } = useTranslation(["dietitian", "common"]);
   const { language } = useLocale();
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
+  const [editingRecommendationId, setEditingRecommendationId] = useState(null);
+  const [editingMessage, setEditingMessage] = useState("");
 
   const selectedRecommendation = useMemo(
     () => recommendations.find((item) => item.id === pendingDeleteId) || null,
     [pendingDeleteId, recommendations],
+  );
+
+  const editingRecommendation = useMemo(
+    () =>
+      recommendations.find((item) => item.id === editingRecommendationId) ||
+      null,
+    [editingRecommendationId, recommendations],
   );
 
   const handleConfirmDelete = async () => {
@@ -46,6 +60,31 @@ function RecommendationTimelineList({
 
     await onDelete(pendingDeleteId);
     setPendingDeleteId(null);
+  };
+
+  const handleOpenEdit = (item) => {
+    if (!onEdit) {
+      return;
+    }
+
+    setEditingRecommendationId(item.id);
+    setEditingMessage(item.message || "");
+  };
+
+  const handleConfirmEdit = async () => {
+    if (!onEdit || !editingRecommendationId) {
+      return;
+    }
+
+    const nextMessage = editingMessage.trim();
+
+    if (!nextMessage) {
+      return;
+    }
+
+    await onEdit(editingRecommendationId, { message: nextMessage });
+    setEditingRecommendationId(null);
+    setEditingMessage("");
   };
 
   if (error) {
@@ -73,6 +112,10 @@ function RecommendationTimelineList({
 
   return (
     <>
+      {mutationError ? (
+        <Alert severity="error">{mutationError.message}</Alert>
+      ) : null}
+
       <Stack spacing={1.5}>
         {recommendations.map((item) => {
           const patientName =
@@ -93,6 +136,14 @@ function RecommendationTimelineList({
                         {formatLocalizedDateTime(item.createdAt, { language })}
                       </Typography>
                     </Stack>
+                    <IconButton
+                      size="small"
+                      color="primary"
+                      onClick={() => handleOpenEdit(item)}
+                      disabled={isMutating || !onEdit}
+                    >
+                      <EditOutlinedIcon fontSize="small" />
+                    </IconButton>
                     <IconButton
                       size="small"
                       color="error"
@@ -130,6 +181,42 @@ function RecommendationTimelineList({
             disabled={isMutating}
           >
             {t("common:actions.delete")}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={Boolean(editingRecommendation)}
+        onClose={() => setEditingRecommendationId(null)}
+        fullWidth
+        maxWidth="sm"
+      >
+        <DialogTitle>{t("timeline.editDialogTitle")}</DialogTitle>
+        <DialogContent>
+          <Stack spacing={1.5} sx={{ mt: 1 }}>
+            <Typography variant="body2" color="text.secondary">
+              {t("timeline.editDialogDescription")}
+            </Typography>
+            <TextField
+              multiline
+              minRows={4}
+              value={editingMessage}
+              onChange={(event) => setEditingMessage(event.target.value)}
+              fullWidth
+              autoFocus
+            />
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setEditingRecommendationId(null)}>
+            {t("common:actions.cancel")}
+          </Button>
+          <Button
+            onClick={handleConfirmEdit}
+            variant="contained"
+            disabled={isMutating || !editingMessage.trim()}
+          >
+            {t("dietitian:actions.update")}
           </Button>
         </DialogActions>
       </Dialog>

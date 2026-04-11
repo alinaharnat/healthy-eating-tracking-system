@@ -14,6 +14,8 @@ import { useTranslation } from "react-i18next";
 function RecommendationForm({
   patients,
   initialPatientId,
+  initialMessage,
+  mode = "create",
   onSubmit,
   isSubmitting,
   error,
@@ -21,14 +23,16 @@ function RecommendationForm({
 }) {
   const { t } = useTranslation("dietitian");
   const [userId, setUserId] = useState(initialPatientId || "");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(initialMessage || "");
   const [validationError, setValidationError] = useState("");
+
+  const isEditMode = mode === "edit";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setValidationError("");
 
-    if (!userId || !message.trim()) {
+    if ((!isEditMode && !userId) || !message.trim()) {
       setValidationError(t("form.validation.required"));
       return;
     }
@@ -38,7 +42,9 @@ function RecommendationForm({
       message: message.trim(),
     });
 
-    setMessage("");
+    if (!isEditMode) {
+      setMessage("");
+    }
   };
 
   return (
@@ -46,9 +52,11 @@ function RecommendationForm({
       <CardContent>
         <Stack component="form" spacing={2} onSubmit={handleSubmit}>
           <Stack spacing={0.5}>
-            <Typography variant="h6">{t("form.title")}</Typography>
+            <Typography variant="h6">
+              {isEditMode ? t("form.editTitle") : t("form.title")}
+            </Typography>
             <Typography color="text.secondary">
-              {t("form.description")}
+              {isEditMode ? t("form.editDescription") : t("form.description")}
             </Typography>
           </Stack>
 
@@ -57,20 +65,22 @@ function RecommendationForm({
           ) : null}
           {error ? <Alert severity="error">{error.message}</Alert> : null}
 
-          <TextField
-            select
-            value={userId}
-            onChange={(event) => setUserId(event.target.value)}
-            label={t("form.patient")}
-            required
-            fullWidth
-          >
-            {patients.map((patient) => (
-              <MenuItem key={patient.id} value={patient.id}>
-                {patient.name} ({patient.email})
-              </MenuItem>
-            ))}
-          </TextField>
+          {isEditMode ? null : (
+            <TextField
+              select
+              value={userId}
+              onChange={(event) => setUserId(event.target.value)}
+              label={t("form.patient")}
+              required
+              fullWidth
+            >
+              {patients.map((patient) => (
+                <MenuItem key={patient.id} value={patient.id}>
+                  {patient.name} ({patient.email})
+                </MenuItem>
+              ))}
+            </TextField>
+          )}
 
           <TextField
             multiline
@@ -88,7 +98,11 @@ function RecommendationForm({
               <Button onClick={onCancel}>{t("actions.cancel")}</Button>
             ) : null}
             <Button type="submit" variant="contained" disabled={isSubmitting}>
-              {isSubmitting ? t("actions.saving") : t("actions.save")}
+              {isSubmitting
+                ? t("actions.saving")
+                : isEditMode
+                  ? t("actions.update")
+                  : t("actions.save")}
             </Button>
           </Stack>
         </Stack>

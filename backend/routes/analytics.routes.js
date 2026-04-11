@@ -5,6 +5,7 @@ import {
   getDailyNutritionSummary,
   getPeriodAnalytics,
   getActivitySummary,
+  getNutritionAndActivityOverview,
   generateAutoRecommendations,
 } from "../controllers/businessLogic.controller.js";
 
@@ -107,6 +108,8 @@ router.get("/period", protect, getPeriodAnalytics);
  *         description: Зведення фізичної активності користувача
  */
 router.get("/activity", protect, getActivitySummary);
+
+router.get("/overview", protect, getNutritionAndActivityOverview);
 
 /**
  * @swagger

@@ -6,9 +6,29 @@ export async function createRecommendation(payload, options = {}) {
   return mapRecommendationModel(response);
 }
 
-export async function listMyRecommendations(options = {}) {
-  const response = await apiClient.get("/recommendations/my", options);
+export async function listMyRecommendations({ userId } = {}, options = {}) {
+  const response = await apiClient.get("/recommendations/my", {
+    ...options,
+    query: {
+      ...(userId ? { userId } : {}),
+    },
+  });
+
   return mapRecommendationList(response || []);
+}
+
+export async function updateRecommendation(
+  recommendationId,
+  payload,
+  options = {},
+) {
+  const response = await apiClient.patch(
+    `/recommendations/${recommendationId}`,
+    payload,
+    options,
+  );
+
+  return mapRecommendationModel(response);
 }
 
 export async function deleteRecommendation(recommendationId, options = {}) {

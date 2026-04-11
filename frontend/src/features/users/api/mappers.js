@@ -52,3 +52,42 @@ export function mapUserList(items = []) {
 export function mapPatientList(items = []) {
   return items.map(mapPatientModel);
 }
+
+export function mapDietitianAssignmentRequestModel(dto = {}) {
+  const client =
+    dto.client && typeof dto.client === "object" ? dto.client : null;
+  const dietitian =
+    dto.dietitian && typeof dto.dietitian === "object" ? dto.dietitian : null;
+
+  return {
+    id: dto.id || dto._id || "",
+    clientId: (client && (client.id || client._id)) || dto.clientId || null,
+    dietitianId:
+      (dietitian && (dietitian.id || dietitian._id)) || dto.dietitianId || null,
+    status: dto.status || "pending",
+    message: dto.message || "",
+    respondedAt: dto.respondedAt || null,
+    createdAt: dto.createdAt || null,
+    updatedAt: dto.updatedAt || null,
+    client: client
+      ? {
+          id: client.id || client._id || "",
+          name: client.name || "",
+          email: client.email || "",
+          isActive: client.isActive !== false,
+        }
+      : null,
+    dietitian: dietitian
+      ? {
+          id: dietitian.id || dietitian._id || "",
+          name: dietitian.name || "",
+          email: dietitian.email || "",
+          isActive: dietitian.isActive !== false,
+        }
+      : null,
+  };
+}
+
+export function mapDietitianAssignmentRequestList(items = []) {
+  return items.map(mapDietitianAssignmentRequestModel);
+}

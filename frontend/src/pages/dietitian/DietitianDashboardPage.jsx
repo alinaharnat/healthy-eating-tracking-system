@@ -1,6 +1,7 @@
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import GroupsIcon from "@mui/icons-material/Groups";
 import HistoryIcon from "@mui/icons-material/History";
+import MarkEmailUnreadIcon from "@mui/icons-material/MarkEmailUnread";
 import {
   Button,
   Card,
@@ -17,6 +18,7 @@ import RecommendationTimelineList from "../../features/dietitian/components/Reco
 import { useDietitianPatients } from "../../features/dietitian/hooks/useDietitianPatients";
 import { useDietitianRecommendations } from "../../features/dietitian/hooks/useDietitianRecommendations";
 import { PATHS } from "../../router/paths";
+import { useNotification } from "../../shared/ui/notifications/useNotification";
 
 function SummaryMetricCard({ title, value, icon }) {
   return (
@@ -42,6 +44,7 @@ function SummaryMetricCard({ title, value, icon }) {
 
 function DietitianDashboardPage() {
   const { t } = useTranslation("dietitian");
+  const { notify } = useNotification();
 
   const {
     patients,
@@ -56,6 +59,9 @@ function DietitianDashboardPage() {
     error: recommendationsError,
     retry: retryRecommendations,
     removeRecommendation,
+    editRecommendation,
+    deleteError,
+    updateError,
     isMutating,
   } = useDietitianRecommendations();
 
@@ -69,6 +75,24 @@ function DietitianDashboardPage() {
   const assignedPatients = patients.length;
   const patientsWithGoal = patients.filter((item) => item.goalType).length;
   const recentRecommendations = recommendations.slice(0, 5);
+
+  const handleDeleteRecommendation = async (recommendationId) => {
+    await removeRecommendation(recommendationId);
+    notify({
+      severity: "success",
+      key: "dietitian.recommendations.notifications.deleted",
+      namespace: "dietitian",
+    });
+  };
+
+  const handleEditRecommendation = async (recommendationId, payload) => {
+    await editRecommendation(recommendationId, payload);
+    notify({
+      severity: "success",
+      key: "dietitian.recommendations.notifications.updated",
+      namespace: "dietitian",
+    });
+  };
 
   return (
     <Stack spacing={2.5}>
@@ -102,6 +126,14 @@ function DietitianDashboardPage() {
               startIcon={<GroupsIcon />}
             >
               {t("actions.viewPatients")}
+            </Button>
+            <Button
+              component={Link}
+              to={PATHS.dietitian.assignmentRequests}
+              variant="outlined"
+              startIcon={<MarkEmailUnreadIcon />}
+            >
+              {t("actions.viewRequests")}
             </Button>
           </Stack>
         </Stack>
@@ -142,8 +174,10 @@ function DietitianDashboardPage() {
             retryPatients();
             retryRecommendations();
           }}
-          onDelete={removeRecommendation}
+          onDelete={handleDeleteRecommendation}
+          onEdit={handleEditRecommendation}
           isMutating={isMutating}
+          mutationError={deleteError || updateError}
           emptyTitle={t("dashboard.emptyRecommendationsTitle")}
           emptyDescription={t("dashboard.emptyRecommendationsDescription")}
         />

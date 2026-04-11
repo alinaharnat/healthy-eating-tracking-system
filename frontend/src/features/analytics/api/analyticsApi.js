@@ -3,14 +3,19 @@ import {
   mapActivitySummaryModel,
   mapAutoRecommendationsModel,
   mapDailySummaryModel,
+  mapNutritionAndActivityOverviewModel,
   mapPeriodAnalyticsModel,
 } from "./mappers";
 
-export async function getDailyNutritionSummary({ date } = {}, options = {}) {
+export async function getDailyNutritionSummary(
+  { date, userId } = {},
+  options = {},
+) {
   const response = await apiClient.get("/analytics/daily", {
     ...options,
     query: {
       date,
+      userId,
     },
   });
 
@@ -18,13 +23,14 @@ export async function getDailyNutritionSummary({ date } = {}, options = {}) {
 }
 
 export async function getPeriodAnalytics(
-  { period = "week" } = {},
+  { period = "week", userId } = {},
   options = {},
 ) {
   const response = await apiClient.get("/analytics/period", {
     ...options,
     query: {
       period,
+      userId,
     },
   });
 
@@ -32,13 +38,14 @@ export async function getPeriodAnalytics(
 }
 
 export async function getActivitySummary(
-  { period = "day" } = {},
+  { period = "day", userId } = {},
   options = {},
 ) {
   const response = await apiClient.get("/analytics/activity", {
     ...options,
     query: {
       period,
+      userId,
     },
   });
 
@@ -53,4 +60,20 @@ export async function generateAutoRecommendations(options = {}) {
   );
 
   return mapAutoRecommendationsModel(response);
+}
+
+export async function getNutritionAndActivityOverview(
+  { userId, date, activityPeriod = "week" } = {},
+  options = {},
+) {
+  const response = await apiClient.get("/analytics/overview", {
+    ...options,
+    query: {
+      userId,
+      date,
+      activityPeriod,
+    },
+  });
+
+  return mapNutritionAndActivityOverviewModel(response);
 }

@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import PatientsTableList from "../../features/dietitian/components/PatientsTableList";
+import RemovePatientConfirmationDialog from "../../features/dietitian/components/RemovePatientConfirmationDialog";
 import { useDietitianPatients } from "../../features/dietitian/hooks/useDietitianPatients";
 import { useLocale } from "../../core/i18n/useLocale";
+import { useNotification } from "../../shared/ui/notifications/useNotification";
 import { sortByLocale } from "../../shared/lib/sort/localeSort";
 import { PATHS } from "../../router/paths";
 
@@ -13,9 +15,18 @@ function PatientsPage() {
   const { t } = useTranslation("dietitian");
   const { language } = useLocale();
   const navigate = useNavigate();
+  const { notify } = useNotification();
   const [search, setSearch] = useState("");
+  const [pendingRemovePatientId, setPendingRemovePatientId] = useState(null);
 
-  const { patients, isLoading, error, retry } = useDietitianPatients();
+  const {
+    patients,
+    isLoading,
+    error,
+    retry,
+    removePatient,
+    isRemovingPatient,
+  } = useDietitianPatients();
 
   const filteredPatients = useMemo(() => {
     const normalizedSearch = search.trim().toLowerCase();
@@ -38,6 +49,27 @@ function PatientsPage() {
 
   const handleCreateRecommendation = (patientId) => {
     navigate(`${PATHS.dietitian.recommendationsCreate}?patientId=${patientId}`);
+  };
+
+  const selectedPatientForRemove = useMemo(
+    () =>
+      filteredPatients.find((item) => item.id === pendingRemovePatientId) ||
+      null,
+    [filteredPatients, pendingRemovePatientId],
+  );
+
+  const handleConfirmRemove = async () => {
+    if (!pendingRemovePatientId) {
+      return;
+    }
+
+    await removePatient(pendingRemovePatientId);
+    setPendingRemovePatientId(null);
+    notify({
+      severity: "success",
+      key: "dietitian.patients.notifications.unassigned",
+      namespace: "dietitian",
+    });
   };
 
   return (
@@ -81,6 +113,16 @@ function PatientsPage() {
         onRetry={retry}
         onOpenPatient={handleOpenPatient}
         onCreateRecommendation={handleCreateRecommendation}
+        onUnassignPatient={setPendingRemovePatientId}
+        isMutating={isRemovingPatient}
+      />
+
+      <RemovePatientConfirmationDialog
+        open={Boolean(selectedPatientForRemove)}
+        patient={selectedPatientForRemove}
+        onClose={() => setPendingRemovePatientId(null)}
+        onConfirm={handleConfirmRemove}
+        isSubmitting={isRemovingPatient}
       />
     </Stack>
   );

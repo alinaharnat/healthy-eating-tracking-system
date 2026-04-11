@@ -19,6 +19,7 @@ import ReportsPage from "../pages/client/ReportsPage";
 import CreateRecommendationPage from "../pages/dietitian/CreateRecommendationPage";
 import DietitianDashboardPage from "../pages/dietitian/DietitianDashboardPage";
 import PatientDetailsPage from "../pages/dietitian/PatientDetailsPage";
+import PatientAssignmentRequestsPage from "../pages/dietitian/PatientAssignmentRequestsPage";
 import PatientsPage from "../pages/dietitian/PatientsPage";
 import RecommendationsManagementPage from "../pages/dietitian/RecommendationsManagementPage";
 import BlockedPage from "../pages/public/BlockedPage";
@@ -92,6 +93,10 @@ function AppRouter() {
               <Route
                 path="recommendations/new"
                 element={<CreateRecommendationPage />}
+              />
+              <Route
+                path="assignment-requests"
+                element={<PatientAssignmentRequestsPage />}
               />
             </Route>
           </Route>

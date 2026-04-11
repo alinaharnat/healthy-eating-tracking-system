@@ -2,6 +2,7 @@ import express from "express";
 import {
   createRecommendation,
   listMyRecommendations,
+  updateRecommendation,
   deleteRecommendation,
 } from "../controllers/recommendation.controller.js";
 
@@ -50,7 +51,7 @@ router.post(
   "/",
   protect,
   authorize("dietitian", "admin"),
-  createRecommendation
+  createRecommendation,
 );
 
 /**
@@ -88,11 +89,13 @@ router.get("/my", protect, listMyRecommendations);
  *       404:
  *         description: Рекомендація не знайдена
  */
-router.delete(
+router.delete("/:id", protect, deleteRecommendation);
+
+router.patch(
   "/:id",
   protect,
   authorize("dietitian", "admin"),
-  deleteRecommendation
+  updateRecommendation,
 );
 
 export default router;

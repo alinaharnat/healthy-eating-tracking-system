@@ -36,6 +36,17 @@ export function mapActivitySummaryModel(dto = {}) {
     totalSteps: toNumber(dto.totalSteps),
     burnedCalories: toNumber(dto.burnedCalories),
     lastWeight: dto.lastWeight === null ? null : toNumber(dto.lastWeight),
+    lastMeasurementAt: dto.lastMeasurementAt || null,
+  };
+}
+
+export function mapNutritionAndActivityOverviewModel(dto = {}) {
+  return {
+    userId: dto.userId || null,
+    dailyNutrition: mapDailySummaryModel(dto.dailyNutrition || {}),
+    weeklyNutrition: mapPeriodAnalyticsModel(dto.weeklyNutrition || {}),
+    monthlyNutrition: mapPeriodAnalyticsModel(dto.monthlyNutrition || {}),
+    activity: mapActivitySummaryModel(dto.activity || {}),
   };
 }
 

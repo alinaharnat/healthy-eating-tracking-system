@@ -24,6 +24,7 @@ export const PATHS = {
     recommendationsManagement: "/dietitian/recommendations",
     recommendationsCreate: "/dietitian/recommendations/new",
     recommendations: "/dietitian/recommendations",
+    assignmentRequests: "/dietitian/assignment-requests",
   },
 
   admin: {

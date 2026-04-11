@@ -3,13 +3,16 @@
     "dashboard": "Dashboard",
     "patients": "Patients",
     "recommendations": "Recommendation History",
-    "createRecommendation": "New Recommendation"
+    "createRecommendation": "New Recommendation",
+    "assignmentRequests": "Assignment Requests"
   },
   "actions": {
     "open": "Open",
     "recommend": "Recommend",
     "createRecommendation": "Create Recommendation",
+    "update": "Update",
     "viewPatients": "View Patients",
+    "viewRequests": "View Requests",
     "retry": "Retry",
     "backToPatients": "Back to Patients",
     "backToHistory": "Back to History",
@@ -48,12 +51,19 @@
       "active": "Active",
       "inactive": "Inactive"
     },
+    "removeAction": "Unassign",
+    "removeDialogTitle": "Unassign patient?",
+    "removeDialogDescription": "This will remove {{name}} from your active patient list.",
+    "removeDialogHint": "The user account remains in the system and can be assigned again later.",
     "emptyTitle": "No assigned patients",
-    "emptyDescription": "You do not have assigned patients yet."
+    "emptyDescription": "You do not have assigned patients yet.",
+    "notifications": {
+      "unassigned": "Patient was unassigned successfully"
+    }
   },
   "patientDetails": {
     "title": "Patient Details",
-    "description": "Read-only profile and recommendation history for this patient.",
+    "description": "Patient profile, progress overview, and recommendation history.",
     "fields": {
       "goal": "Goal type",
       "dailyGoal": "Daily calorie goal",
@@ -61,8 +71,8 @@
       "weight": "Weight"
     },
     "notAvailable": "Not available",
-    "readOnlyTitle": "Nutrition and activity overview",
-    "readOnlyDescription": "Read-only details are based on available profile data. Additional activity analytics require a dedicated backend endpoint.",
+    "overviewTitle": "Nutrition and Activity Overview",
+    "overviewDescription": "Daily nutrition, trend data, and activity metrics for this patient.",
     "timelineTitle": "Recommendation history",
     "emptyRecommendationsTitle": "No recommendations for this patient",
     "emptyRecommendationsDescription": "Create a recommendation to start the history.",
@@ -86,6 +96,8 @@
   "form": {
     "title": "Recommendation Form",
     "description": "Use concise and specific guidance tailored to the patient's goal.",
+    "editTitle": "Edit Recommendation",
+    "editDescription": "Update recommendation text while keeping patient context unchanged.",
     "patient": "Patient",
     "message": "Recommendation",
     "messagePlaceholder": "Example: Increase protein intake at breakfast and add a 20-minute evening walk.",
@@ -98,6 +110,52 @@
     "emptyDescription": "Create a recommendation to populate this timeline.",
     "unknownPatient": "Unknown patient",
     "deleteDialogTitle": "Delete recommendation?",
-    "deleteDialogDescription": "This action cannot be undone."
+    "deleteDialogDescription": "This action cannot be undone.",
+    "editDialogTitle": "Edit recommendation",
+    "editDialogDescription": "Refine the guidance and save changes."
+  },
+  "overview": {
+    "dailyCalories": "Daily calories",
+    "proteins": "Proteins",
+    "fats": "Fats",
+    "carbs": "Carbs",
+    "calorieGoal": "Calorie goal",
+    "steps": "Steps",
+    "burnedCalories": "Burned calories",
+    "latestWeight": "Latest weight",
+    "weeklyTrend": "Weekly nutrition trend",
+    "monthlyTrend": "Monthly nutrition trend",
+    "averageCalories": "Average calories: {{value}} kcal"
+  },
+  "requests": {
+    "title": "Patient Assignment Requests",
+    "description": "Review incoming client requests and accept or reject assignment safely.",
+    "pendingTitle": "Pending requests",
+    "recentTitle": "Recently handled",
+    "emptyPendingTitle": "No pending requests",
+    "emptyPendingDescription": "New client requests will appear here.",
+    "emptyRecentTitle": "No handled requests yet",
+    "emptyRecentDescription": "Accepted and rejected requests will appear here.",
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
+    },
+    "actions": {
+      "accept": "Accept",
+      "reject": "Reject"
+    },
+    "notifications": {
+      "accepted": "Request accepted and patient assigned",
+      "rejected": "Request rejected"
+    }
+  },
+  "recommendations": {
+    "notifications": {
+      "created": "Recommendation created",
+      "updated": "Recommendation updated",
+      "deleted": "Recommendation deleted"
+    }
   }
 }

@@ -4,6 +4,7 @@ import {
   createRecommendationForPatient,
   deleteDietitianRecommendation,
   listDietitianRecommendations,
+  updateDietitianRecommendation,
 } from "../api";
 
 export function useDietitianRecommendations({ patientId = null } = {}) {
@@ -42,9 +43,18 @@ export function useDietitianRecommendations({ patientId = null } = {}) {
     },
   );
 
+  const updateRequest = useApiRequest(
+    ({ recommendationId, payload, signal }) =>
+      updateDietitianRecommendation(recommendationId, payload, { signal }),
+    {
+      manual: true,
+    },
+  );
+
   const listRun = listRequest.run;
   const createRun = createRequest.run;
   const deleteRun = deleteRequest.run;
+  const updateRun = updateRequest.run;
 
   const reload = useCallback(
     async (targetPatientId = normalizedPatientId) => {
@@ -72,6 +82,15 @@ export function useDietitianRecommendations({ patientId = null } = {}) {
     [deleteRun, reload],
   );
 
+  const editRecommendation = useCallback(
+    async (recommendationId, payload) => {
+      const updated = await updateRun({ recommendationId, payload });
+      await reload();
+      return updated;
+    },
+    [reload, updateRun],
+  );
+
   const recommendations = useMemo(
     () => listRequest.data || [],
     [listRequest.data],
@@ -85,8 +104,13 @@ export function useDietitianRecommendations({ patientId = null } = {}) {
     reload,
     createForPatient,
     removeRecommendation,
+    editRecommendation,
     createError: createRequest.error,
     deleteError: deleteRequest.error,
-    isMutating: createRequest.isLoading || deleteRequest.isLoading,
+    updateError: updateRequest.error,
+    isMutating:
+      createRequest.isLoading ||
+      deleteRequest.isLoading ||
+      updateRequest.isLoading,
   };
 }

@@ -1,5 +1,6 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupsIcon from "@mui/icons-material/Groups";
+import MarkEmailUnreadIcon from "@mui/icons-material/MarkEmailUnread";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import { useTranslation } from "react-i18next";
@@ -29,6 +30,11 @@ function DietitianLayout() {
       label: t("dietitian:navigation.createRecommendation"),
       to: PATHS.dietitian.recommendationsCreate,
       icon: <PostAddIcon />,
+    },
+    {
+      label: t("dietitian:navigation.assignmentRequests"),
+      to: PATHS.dietitian.assignmentRequests,
+      icon: <MarkEmailUnreadIcon />,
     },
   ];
 
