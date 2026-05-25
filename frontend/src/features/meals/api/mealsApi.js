@@ -1,8 +1,13 @@
 import apiClient from "../../../core/api";
-import { mapMealList, mapMealModel } from "./mappers";
+import { mapMealList, mapMealModel, mapMealWritePayload } from "./mappers";
 
 export async function createMeal(payload, options = {}) {
-  const response = await apiClient.post("/meals", payload, options);
+  const response = await apiClient.post(
+    "/meals",
+    mapMealWritePayload(payload),
+    options,
+  );
+
   return mapMealModel(response);
 }
 
@@ -54,7 +59,12 @@ export async function getMealHistory({ period = "week" } = {}, options = {}) {
 }
 
 export async function updateMeal(mealId, payload, options = {}) {
-  const response = await apiClient.put(`/meals/${mealId}`, payload, options);
+  const response = await apiClient.put(
+    `/meals/${mealId}`,
+    mapMealWritePayload(payload),
+    options,
+  );
+
   return mapMealModel(response);
 }
 

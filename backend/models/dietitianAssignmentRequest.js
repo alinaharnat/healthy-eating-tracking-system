@@ -16,7 +16,7 @@ const DietitianAssignmentRequestSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "accepted", "rejected", "cancelled"],
+      enum: ["pending", "accepted", "rejected", "cancelled", "canceled"],
       default: "pending",
       index: true,
     },
@@ -34,6 +34,15 @@ const DietitianAssignmentRequestSchema = new mongoose.Schema(
 // Only one pending request is allowed for a client-dietitian pair.
 DietitianAssignmentRequestSchema.index(
   { clientId: 1, dietitianId: 1, status: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { status: "pending" },
+  },
+);
+
+// A client can have only one active pending request at a time.
+DietitianAssignmentRequestSchema.index(
+  { clientId: 1, status: 1 },
   {
     unique: true,
     partialFilterExpression: { status: "pending" },

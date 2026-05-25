@@ -19,6 +19,7 @@
     "saveMeasurement": "Зберегти вимірювання",
     "latestMeasurements": "Останні вимірювання",
     "emptyMeasurements": "Вимірювання відсутні",
+    "emptyForPeriod": "Немає вимірювань за період: {{period}}",
     "recordedAt": "Час запису",
     "pulse": "Пульс",
     "weight": "Вага"

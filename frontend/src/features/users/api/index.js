@@ -1,4 +1,5 @@
 export {
+  cancelDietitianRequest,
   createDietitianRequest,
   getMe,
   listDietitians,

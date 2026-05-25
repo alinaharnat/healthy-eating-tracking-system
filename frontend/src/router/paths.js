@@ -14,6 +14,7 @@ export const PATHS = {
     reports: "/client/reports",
     products: "/client/products",
     profile: "/client/profile",
+    dietitianConnection: "/client/dietitian-connection",
   },
 
   dietitian: {

@@ -35,12 +35,50 @@
     "mealType": "Meal type",
     "date": "Date and time",
     "products": "Products",
+    "catalogProducts": "Products from database",
+    "customProducts": "Custom products (meal-only)",
     "addProduct": "Add product",
     "emptyProducts": "No products selected",
+    "unknownProduct": "Unknown product",
     "totalCalories": "Estimated total: {{value}} kcal",
+    "totalMacros": "Proteins: {{proteins}}g | Fats: {{fats}}g | Carbs: {{carbs}}g",
+    "source": {
+      "catalog": "Database",
+      "custom": "Custom"
+    },
+    "custom": {
+      "name": "Product name",
+      "calories": "Calories / 100g",
+      "proteins": "Proteins / 100g",
+      "fats": "Fats / 100g",
+      "carbs": "Carbs / 100g",
+      "grams": "Weight (grams)",
+      "add": "Add custom"
+    },
+    "validation": {
+      "dateRequired": "Meal date is required.",
+      "mealTypeRequired": "Meal type is required.",
+      "invalidDate": "Please provide a valid meal date.",
+      "invalidMealType": "Invalid meal type selected.",
+      "productsRequired": "Add at least one meal item before saving.",
+      "invalidProductId": "Item {{name}} has an invalid product.",
+      "invalidWeightGrams": "Item {{name}} must have weight greater than 0 g.",
+      "invalidCustomProduct": "Item {{name}} has invalid custom product data.",
+      "selectProduct": "Select a product before adding it.",
+      "positiveWeight": "Weight must be greater than 0 g.",
+      "duplicateMerged": "{{name}} already exists in draft. We merged it and updated total grams."
+    },
     "saving": "Saving...",
     "create": "Create",
     "update": "Update"
+  },
+  "notifications": {
+    "created": "Meal created",
+    "updated": "Meal updated",
+    "deleted": "Meal deleted",
+    "createFailed": "Failed to create meal",
+    "updateFailed": "Failed to update meal",
+    "deleteFailed": "Failed to delete meal"
   },
   "productDialog": {
     "title": "Select Product",

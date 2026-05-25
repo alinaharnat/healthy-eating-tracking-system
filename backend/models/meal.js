@@ -1,15 +1,43 @@
 import mongoose from "mongoose";
+
+const CustomMealProductSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, trim: true },
+    calories: { type: Number, required: true, min: 0 },
+    proteins: { type: Number, required: true, min: 0 },
+    fats: { type: Number, required: true, min: 0 },
+    carbs: { type: Number, required: true, min: 0 },
+  },
+  { _id: false },
+);
+
 const MealProductSchema = new mongoose.Schema(
   {
+    source: {
+      type: String,
+      enum: ["catalog", "custom"],
+      default: "catalog",
+      required: true,
+    },
     productId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
-      required: true,
+      required: function requiredProductId() {
+        return this.source !== "custom";
+      },
+    },
+    customProduct: {
+      type: CustomMealProductSchema,
+      required: function requiredCustomProduct() {
+        return this.source === "custom";
+      },
+      default: undefined,
     },
     weightGrams: { type: Number, required: true },
   },
-  { _id: false }
+  { _id: true },
 );
+
 const MealSchema = new mongoose.Schema(
   {
     userId: {
@@ -25,6 +53,7 @@ const MealSchema = new mongoose.Schema(
     },
     mealProducts: { type: [MealProductSchema], required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
+
 export default mongoose.model("Meal", MealSchema);

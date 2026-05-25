@@ -19,7 +19,7 @@ export const changeUserRole = async (req, res) => {
   const user = await User.findByIdAndUpdate(
     userId,
     { role },
-    { new: true }
+    { new: true },
   ).select("-passwordHash");
 
   if (!user) {
@@ -39,7 +39,7 @@ export const blockUser = async (req, res) => {
   const user = await User.findByIdAndUpdate(
     userId,
     { isActive: false },
-    { new: true }
+    { new: true },
   ).select("-passwordHash");
 
   if (!user) {
@@ -59,7 +59,7 @@ export const unblockUser = async (req, res) => {
   const user = await User.findByIdAndUpdate(
     userId,
     { isActive: true },
-    { new: true }
+    { new: true },
   ).select("-passwordHash");
 
   if (!user) {
@@ -162,8 +162,10 @@ export const getSystemStatistics = async (req, res) => {
 
   meals.forEach((meal) => {
     meal.mealProducts.forEach((mp) => {
-      if (!mp.productId) return;
-      const cals = mp.productId.calories || 0;
+      const nutritionSource = mp.productId || mp.customProduct;
+      if (!nutritionSource) return;
+
+      const cals = nutritionSource.calories || 0;
       totalCalories += (cals * mp.weightGrams) / 100;
       count++;
     });

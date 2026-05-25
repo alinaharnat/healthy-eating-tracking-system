@@ -17,5 +17,43 @@
     "lose": "Lose weight",
     "maintain": "Maintain weight",
     "gain": "Gain weight"
+  },
+  "dietitianConnection": {
+    "title": "Find and Connect with a Dietitian",
+    "description": "Search active dietitians, send a join request, and track your connection status.",
+    "actions": {
+      "sendRequest": "Send request",
+      "cancelRequest": "Cancel request"
+    },
+    "status": {
+      "connectedTitle": "You are connected",
+      "connectedDescription": "Your account is currently linked to a dietitian.",
+      "pendingTitle": "Request pending",
+      "pendingDescription": "Your join request is waiting for dietitian approval.",
+      "unassignedTitle": "No dietitian assigned",
+      "unassignedDescription": "Choose a dietitian below and send a request to connect.",
+      "latestRequestHint": "You can send a new request when needed.",
+      "labels": {
+        "connected": "Connected",
+        "pending": "Pending",
+        "accepted": "Accepted",
+        "rejected": "Rejected",
+        "cancelled": "Canceled",
+        "canceled": "Canceled"
+      }
+    },
+    "search": {
+      "title": "Dietitian Directory",
+      "description": "Use search to find a dietitian by name or email.",
+      "field": "Search dietitian",
+      "placeholder": "Type name or email",
+      "requestMessage": "Request message (optional)",
+      "requestMessagePlaceholder": "Example: I would like guidance for weight loss and meal planning.",
+      "empty": "No dietitians found"
+    },
+    "notifications": {
+      "requestSent": "Join request sent",
+      "requestCanceled": "Request canceled"
+    }
   }
 }

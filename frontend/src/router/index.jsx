@@ -11,6 +11,7 @@ import UserActivityPage from "../pages/admin/UserActivityPage";
 import UsersManagementPage from "../pages/admin/UsersManagementPage";
 import ActivityPage from "../pages/client/ActivityPage";
 import ClientDashboardPage from "../pages/client/ClientDashboardPage";
+import JoinDietitianPage from "../pages/client/JoinDietitianPage";
 import MealHistoryPage from "../pages/client/MealHistoryPage";
 import MealsPage from "../pages/client/MealsPage";
 import ProfilePage from "../pages/client/ProfilePage";
@@ -75,6 +76,10 @@ function AppRouter() {
               <Route path="recommendations" element={<RecommendationsPage />} />
               <Route path="reports" element={<ReportsPage />} />
               <Route path="profile" element={<ProfilePage />} />
+              <Route
+                path="dietitian-connection"
+                element={<JoinDietitianPage />}
+              />
             </Route>
           </Route>
 

@@ -1,7 +1,5 @@
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import {
   Card,
   CardContent,
@@ -17,15 +15,7 @@ import { useLocale } from "../../../core/i18n/useLocale";
 import { formatLocalizedDateTime } from "../../../shared/lib/format/dateTime";
 import EmptyStateCard from "../../../shared/ui/states/EmptyStateCard";
 
-function MealList({
-  meals,
-  onCreate,
-  onEdit,
-  onDelete,
-  onAddProduct,
-  onRemoveProduct,
-  isMutating,
-}) {
+function MealList({ meals, onCreate, onEdit, onDelete, isMutating }) {
   const { t } = useTranslation(["meals", "common"]);
   const { language } = useLocale();
 
@@ -61,14 +51,6 @@ function MealList({
                 </Stack>
 
                 <Stack direction="row" spacing={1}>
-                  <Button
-                    size="small"
-                    startIcon={<AddCircleOutlineIcon />}
-                    onClick={() => onAddProduct(meal)}
-                    disabled={isMutating}
-                  >
-                    {t("meals:list.addProduct")}
-                  </Button>
                   <IconButton
                     onClick={() => onEdit(meal)}
                     disabled={isMutating}
@@ -94,7 +76,7 @@ function MealList({
                 <Stack spacing={1}>
                   {meal.mealProducts.map((product, index) => (
                     <Stack
-                      key={`${meal.id}-${product.productId}-${index}`}
+                      key={`${meal.id}-${product.itemId || product.productId || index}`}
                       direction="row"
                       alignItems="center"
                       justifyContent="space-between"
@@ -102,7 +84,8 @@ function MealList({
                     >
                       <Stack>
                         <Typography variant="body2">
-                          {product.productName || product.productId.slice(-6)}
+                          {product.productName ||
+                            t("meals:form.unknownProduct")}
                         </Typography>
                         <Typography variant="caption" color="text.secondary">
                           {product.weightGrams} g
@@ -110,16 +93,20 @@ function MealList({
                       </Stack>
 
                       <Stack direction="row" spacing={1} alignItems="center">
-                        <Chip size="small" label={`${product.weightGrams} g`} />
-                        <IconButton
+                        <Chip
                           size="small"
-                          onClick={() =>
-                            onRemoveProduct(meal.id, product.productId)
+                          color={
+                            product.source === "custom"
+                              ? "secondary"
+                              : "default"
                           }
-                          disabled={isMutating}
-                        >
-                          <RemoveCircleOutlineIcon fontSize="small" />
-                        </IconButton>
+                          label={
+                            product.source === "custom"
+                              ? t("meals:form.source.custom")
+                              : t("meals:form.source.catalog")
+                          }
+                        />
+                        <Chip size="small" label={`${product.weightGrams} g`} />
                       </Stack>
                     </Stack>
                   ))}

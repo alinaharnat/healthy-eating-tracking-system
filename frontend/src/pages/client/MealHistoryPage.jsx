@@ -1,4 +1,5 @@
 import {
+  Divider,
   MenuItem,
   Paper,
   Stack,
@@ -86,6 +87,23 @@ function MealHistoryPage() {
                   })}
                 />
               </Stack>
+
+              {meal.mealProducts.length ? (
+                <>
+                  <Divider sx={{ my: 1.25 }} />
+                  <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                    {meal.mealProducts.map((item, index) => (
+                      <Chip
+                        key={`${meal.id}-${item.itemId || item.productId || index}`}
+                        size="small"
+                        label={
+                          item.productName || t("meals:form.unknownProduct")
+                        }
+                      />
+                    ))}
+                  </Stack>
+                </>
+              ) : null}
             </Paper>
           ))}
         </Stack>

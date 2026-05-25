@@ -26,8 +26,25 @@ export const createMeasurement = async (req, res) => {
 
 export const latestMeasurements = async (req, res) => {
   try {
-    const items = await IoTMeasurement.find({ userId: req.user._id })
-      .sort({ createdAt: -1 })
+    const normalizedPeriod =
+      req.query.period === "day"
+        ? "day"
+        : req.query.period === "week"
+          ? "week"
+          : null;
+
+    const query = { userId: req.user._id };
+
+    if (normalizedPeriod) {
+      const totalDays = normalizedPeriod === "week" ? 7 : 1;
+      const start = new Date();
+      start.setHours(0, 0, 0, 0);
+      start.setDate(start.getDate() - (totalDays - 1));
+      query.timestamp = { $gte: start };
+    }
+
+    const items = await IoTMeasurement.find(query)
+      .sort({ timestamp: -1 })
       .limit(10);
 
     return res.json(items);

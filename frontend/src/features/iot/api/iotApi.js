@@ -6,8 +6,15 @@ export async function createMeasurement(payload, options = {}) {
   return mapMeasurementModel(response);
 }
 
-export async function getLatestMeasurements(options = {}) {
-  const response = await apiClient.get("/iot-measurements/latest", options);
+export async function getLatestMeasurements({ period } = {}, options = {}) {
+  const response = await apiClient.get("/iot-measurements/latest", {
+    ...options,
+    query: {
+      ...(options.query || {}),
+      period,
+    },
+  });
+
   return mapMeasurementList(response || []);
 }
 

@@ -85,3 +85,13 @@ export async function respondDietitianRequest(
 
   return mapDietitianAssignmentRequestModel(response);
 }
+
+export async function cancelDietitianRequest(requestId, options = {}) {
+  const response = await apiClient.patch(
+    `/users/dietitian-requests/${requestId}/cancel`,
+    {},
+    options,
+  );
+
+  return mapDietitianAssignmentRequestModel(response);
+}

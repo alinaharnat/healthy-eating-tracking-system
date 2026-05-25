@@ -16,15 +16,19 @@ function aggregateNutrition(meals) {
 
   meals.forEach((meal) => {
     meal.mealProducts.forEach((item) => {
-      const p = item.productId;
-      if (!p) return;
+      const product = item.productId;
+      const custom = item.customProduct;
+
+      const sourceNutrition = product || custom;
+
+      if (!sourceNutrition) return;
 
       const factor = item.weightGrams / 100;
 
-      totals.calories += (p.calories || 0) * factor;
-      totals.proteins += (p.proteins || 0) * factor;
-      totals.fats += (p.fats || 0) * factor;
-      totals.carbs += (p.carbs || 0) * factor;
+      totals.calories += (sourceNutrition.calories || 0) * factor;
+      totals.proteins += (sourceNutrition.proteins || 0) * factor;
+      totals.fats += (sourceNutrition.fats || 0) * factor;
+      totals.carbs += (sourceNutrition.carbs || 0) * factor;
     });
   });
 

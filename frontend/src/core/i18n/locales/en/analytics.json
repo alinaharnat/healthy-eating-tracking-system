@@ -19,6 +19,7 @@
     "saveMeasurement": "Save measurement",
     "latestMeasurements": "Latest measurements",
     "emptyMeasurements": "No measurements yet",
+    "emptyForPeriod": "No measurements in {{period}}",
     "recordedAt": "Recorded at",
     "pulse": "Pulse",
     "weight": "Weight"

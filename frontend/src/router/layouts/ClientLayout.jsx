@@ -5,6 +5,7 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import DescriptionIcon from "@mui/icons-material/Description";
 import PersonIcon from "@mui/icons-material/Person";
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import { useTranslation } from "react-i18next";
 import PrivateLayoutFrame from "./PrivateLayoutFrame";
 import { PATHS } from "../paths";
@@ -47,6 +48,11 @@ function ClientLayout() {
       label: t("navigation.profile"),
       to: PATHS.client.profile,
       icon: <PersonIcon />,
+    },
+    {
+      label: t("navigation.dietitianConnection"),
+      to: PATHS.client.dietitianConnection,
+      icon: <PersonSearchIcon />,
     },
   ];
 

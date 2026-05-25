@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getActivitySummary } from "../../analytics/api";
 import {
   createMeasurement,
@@ -9,12 +9,13 @@ import { useApiRequest } from "../../../shared/hooks/useApiRequest";
 
 export function useActivityPageData(initialPeriod = "week") {
   const [period, setPeriod] = useState(initialPeriod);
+  const periodRef = useRef(initialPeriod);
 
   const summaryRequest = useApiRequest(
-    ({ nextPeriod, signal }) =>
+    ({ period: requestPeriod, signal }) =>
       getActivitySummary(
         {
-          period: nextPeriod,
+          period: requestPeriod,
         },
         { signal },
       ),
@@ -25,7 +26,13 @@ export function useActivityPageData(initialPeriod = "week") {
   );
 
   const measurementsRequest = useApiRequest(
-    ({ signal }) => getLatestMeasurements({ signal }),
+    ({ period: requestPeriod, signal }) =>
+      getLatestMeasurements(
+        {
+          period: requestPeriod,
+        },
+        { signal },
+      ),
     {
       manual: true,
       retries: 1,
@@ -52,19 +59,24 @@ export function useActivityPageData(initialPeriod = "week") {
   const deleteRun = deleteRequest.run;
 
   useEffect(() => {
-    summaryRun({ nextPeriod: period }).catch(() => null);
-  }, [period, summaryRun]);
+    periodRef.current = period;
+  }, [period]);
 
   useEffect(() => {
-    measurementsRun({}).catch(() => null);
-  }, [measurementsRun]);
-
-  const reloadAll = useCallback(async () => {
-    await Promise.all([
-      summaryRun({ nextPeriod: period }),
-      measurementsRun({}),
-    ]);
+    Promise.all([summaryRun({ period }), measurementsRun({ period })]).catch(
+      () => null,
+    );
   }, [measurementsRun, period, summaryRun]);
+
+  const reloadAll = useCallback(
+    async (requestedPeriod = periodRef.current) => {
+      await Promise.all([
+        summaryRun({ period: requestedPeriod }),
+        measurementsRun({ period: requestedPeriod }),
+      ]);
+    },
+    [measurementsRun, summaryRun],
+  );
 
   const addMeasurement = useCallback(
     async (payload) => {
@@ -85,6 +97,7 @@ export function useActivityPageData(initialPeriod = "week") {
   return {
     period,
     setPeriod,
+    activePeriod: summaryRequest.data?.period || period,
     summary: summaryRequest.data,
     measurements: measurementsRequest.data || [],
     isLoading: summaryRequest.isLoading || measurementsRequest.isLoading,

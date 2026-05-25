@@ -29,9 +29,10 @@ function ActivityMetricCard({ title, value, subtitle, icon }) {
   );
 }
 
-function ActivityWidget({ summary }) {
+function ActivityWidget({ summary, period = "week" }) {
   const { t } = useTranslation("analytics");
   const { language } = useLocale();
+  const normalizedPeriod = period === "day" ? "day" : "week";
 
   return (
     <Grid container spacing={2}>
@@ -39,7 +40,7 @@ function ActivityWidget({ summary }) {
         <ActivityMetricCard
           title={t("activity.steps")}
           value={formatLocalizedNumber(summary?.totalSteps || 0, { language })}
-          subtitle={t("activity.period")}
+          subtitle={t(`activity.${normalizedPeriod}`)}
           icon={<DirectionsWalkIcon color="secondary" />}
         />
       </Grid>

@@ -8,6 +8,13 @@ function mapNullableNumber(value) {
 }
 
 export function mapUserModel(dto = {}) {
+  const dietitian =
+    dto.dietitian && typeof dto.dietitian === "object"
+      ? dto.dietitian
+      : dto.dietitianId && typeof dto.dietitianId === "object"
+        ? dto.dietitianId
+        : null;
+
   return {
     id: dto.id || dto._id || "",
     name: dto.name || "",
@@ -19,7 +26,17 @@ export function mapUserModel(dto = {}) {
     height: mapNullableNumber(dto.height),
     goalType: dto.goalType || null,
     dailyCalorieGoal: mapNullableNumber(dto.dailyCalorieGoal) || 0,
-    dietitianId: dto.dietitianId || null,
+    dietitianId:
+      (dietitian && (dietitian.id || dietitian._id)) || dto.dietitianId || null,
+    dietitian: dietitian
+      ? {
+          id: dietitian.id || dietitian._id || "",
+          name: dietitian.name || "",
+          email: dietitian.email || "",
+          role: dietitian.role || "dietitian",
+          isActive: dietitian.isActive !== false,
+        }
+      : null,
     isActive: dto.isActive !== false,
     createdAt: dto.createdAt || null,
     updatedAt: dto.updatedAt || null,

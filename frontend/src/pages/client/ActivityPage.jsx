@@ -30,6 +30,7 @@ function ActivityPage() {
   const {
     period,
     setPeriod,
+    activePeriod,
     summary,
     measurements,
     isLoading,
@@ -39,6 +40,9 @@ function ActivityPage() {
     removeMeasurement,
     isMutating,
   } = useActivityPageData("week");
+
+  const hasSummaryData =
+    Number(summary?.totalSteps || 0) > 0 || Boolean(summary?.lastMeasurementAt);
 
   const [form, setForm] = useState({
     pulse: "",
@@ -102,8 +106,14 @@ function ActivityPage() {
         />
       ) : isLoading ? (
         <SectionLoadingState label={t("common:states.loading")} />
+      ) : !hasSummaryData ? (
+        <EmptyStateCard
+          title={t("analytics:activity.emptyForPeriod", {
+            period: t(`analytics:activity.${activePeriod}`),
+          })}
+        />
       ) : (
-        <ActivityWidget summary={summary} />
+        <ActivityWidget summary={summary} period={activePeriod} />
       )}
 
       <Paper sx={{ p: 3 }}>
@@ -156,7 +166,11 @@ function ActivityPage() {
           </Typography>
 
           {!measurements.length ? (
-            <EmptyStateCard title={t("analytics:activity.emptyMeasurements")} />
+            <EmptyStateCard
+              title={t("analytics:activity.emptyForPeriod", {
+                period: t(`analytics:activity.${activePeriod}`),
+              })}
+            />
           ) : (
             <Table size="small">
               <TableHead>

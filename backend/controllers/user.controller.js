@@ -42,12 +42,53 @@ function normalizeRequest(dto = {}) {
   };
 }
 
+function normalizeUser(user) {
+  if (!user) {
+    return null;
+  }
+
+  const dietitian =
+    user.dietitianId && typeof user.dietitianId === "object"
+      ? user.dietitianId
+      : null;
+
+  return {
+    id: user.id || user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    age: user.age,
+    weight: user.weight,
+    height: user.height,
+    language: user.language,
+    goalType: user.goalType,
+    dailyCalorieGoal: user.dailyCalorieGoal,
+    dietitianId: dietitian?._id || dietitian?.id || user.dietitianId || null,
+    dietitian: dietitian
+      ? {
+          id: dietitian._id || dietitian.id,
+          name: dietitian.name,
+          email: dietitian.email,
+          role: dietitian.role,
+          isActive: dietitian.isActive,
+        }
+      : null,
+    isActive: user.isActive,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
+  };
+}
+
 /** GET /api/users/me */
 export const getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).select("-passwordHash");
+    const user = await User.findById(req.user._id)
+      .select("-passwordHash")
+      .populate("dietitianId", "name email role isActive");
+
     if (!user) return res.status(404).json({ message: "User not found" });
-    return res.json(user);
+
+    return res.json(normalizeUser(user));
   } catch (error) {
     console.error("getMe error:", error);
     return res.status(500).json({ message: "Server error" });
@@ -75,9 +116,11 @@ export const updateMe = async (req, res) => {
     const updated = await User.findByIdAndUpdate(req.user._id, data, {
       new: true,
       runValidators: true,
-    });
+    })
+      .select("-passwordHash")
+      .populate("dietitianId", "name email role isActive");
 
-    res.json(updated);
+    res.json(normalizeUser(updated));
   } catch (error) {
     console.error("updateMe error:", error);
     return res.status(500).json({ message: "Server error" });
@@ -153,7 +196,7 @@ export const listDietitians = async (req, res) => {
   try {
     const dietitians = await User.find(
       { role: "dietitian", isActive: true },
-      "name email isActive",
+      "name email role isActive",
     ).sort({ name: 1 });
 
     return res.json(dietitians);
@@ -198,14 +241,13 @@ export const createDietitianRequest = async (req, res) => {
 
     const existingPending = await DietitianAssignmentRequest.findOne({
       clientId: req.user._id,
-      dietitianId,
       status: "pending",
     });
 
     if (existingPending) {
       return res
         .status(409)
-        .json({ message: "Pending request already exists" });
+        .json({ message: "Client already has a pending request" });
     }
 
     const request = await DietitianAssignmentRequest.create({
@@ -214,6 +256,8 @@ export const createDietitianRequest = async (req, res) => {
       status: "pending",
       message: String(message || "").trim(),
     });
+
+    await request.populate("dietitianId", "name email isActive");
 
     return res.status(201).json(normalizeRequest(request));
   } catch (error) {
@@ -248,7 +292,9 @@ export const listIncomingDietitianRequests = async (req, res) => {
 
     if (
       status &&
-      ["pending", "accepted", "rejected", "cancelled"].includes(status)
+      ["pending", "accepted", "rejected", "cancelled", "canceled"].includes(
+        status,
+      )
     ) {
       criteria.status = status;
     }
@@ -343,6 +389,39 @@ export const respondDietitianRequest = async (req, res) => {
     return res.json(normalizeRequest(request));
   } catch (error) {
     console.error("respondDietitianRequest error:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+/** PATCH /api/users/dietitian-requests/:requestId/cancel (client) */
+export const cancelDietitianRequest = async (req, res) => {
+  try {
+    const { requestId } = req.params;
+
+    if (!isValidObjectId(requestId)) {
+      return res.status(400).json({ message: "Invalid requestId" });
+    }
+
+    const request = await DietitianAssignmentRequest.findOne({
+      _id: requestId,
+      clientId: req.user._id,
+      status: "pending",
+    });
+
+    if (!request) {
+      return res.status(404).json({ message: "Pending request not found" });
+    }
+
+    request.status = "cancelled";
+    request.respondedAt = new Date();
+    request.respondedBy = req.user._id;
+
+    await request.save();
+    await request.populate("dietitianId", "name email isActive");
+
+    return res.json(normalizeRequest(request));
+  } catch (error) {
+    console.error("cancelDietitianRequest error:", error);
     return res.status(500).json({ message: "Server error" });
   }
 };

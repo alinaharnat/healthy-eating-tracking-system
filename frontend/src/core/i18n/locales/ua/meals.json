@@ -35,12 +35,50 @@
     "mealType": "Тип прийому",
     "date": "Дата та час",
     "products": "Продукти",
+    "catalogProducts": "Продукти з бази",
+    "customProducts": "Власні продукти (лише в цьому прийомі)",
     "addProduct": "Додати продукт",
     "emptyProducts": "Продукти не вибрані",
+    "unknownProduct": "Невідомий продукт",
     "totalCalories": "Орієнтовно: {{value}} ккал",
+    "totalMacros": "Білки: {{proteins}}г | Жири: {{fats}}г | Вуглеводи: {{carbs}}г",
+    "source": {
+      "catalog": "База",
+      "custom": "Власний"
+    },
+    "custom": {
+      "name": "Назва продукту",
+      "calories": "Калорії / 100г",
+      "proteins": "Білки / 100г",
+      "fats": "Жири / 100г",
+      "carbs": "Вуглеводи / 100г",
+      "grams": "Вага (грами)",
+      "add": "Додати власний"
+    },
+    "validation": {
+      "dateRequired": "Дата прийому їжі є обов'язковою.",
+      "mealTypeRequired": "Оберіть тип прийому їжі.",
+      "invalidDate": "Вкажіть коректну дату прийому їжі.",
+      "invalidMealType": "Обрано некоректний тип прийому їжі.",
+      "productsRequired": "Перед збереженням додайте хоча б один елемент прийому.",
+      "invalidProductId": "Позиція {{name}} містить некоректний продукт.",
+      "invalidWeightGrams": "Позиція {{name}} повинна мати вагу більше 0 г.",
+      "invalidCustomProduct": "Позиція {{name}} містить некоректні дані власного продукту.",
+      "selectProduct": "Оберіть продукт перед додаванням.",
+      "positiveWeight": "Вага повинна бути більше 0 г.",
+      "duplicateMerged": "{{name}} вже є у чернетці. Значення об'єднано і вагу підсумовано."
+    },
     "saving": "Збереження...",
     "create": "Створити",
     "update": "Оновити"
+  },
+  "notifications": {
+    "created": "Прийом їжі створено",
+    "updated": "Прийом їжі оновлено",
+    "deleted": "Прийом їжі видалено",
+    "createFailed": "Не вдалося створити прийом їжі",
+    "updateFailed": "Не вдалося оновити прийом їжі",
+    "deleteFailed": "Не вдалося видалити прийом їжі"
   },
   "productDialog": {
     "title": "Вибір продукту",

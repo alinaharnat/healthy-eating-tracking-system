@@ -9,17 +9,12 @@ import {
 } from "@mui/material";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  addProductToMeal,
-  removeProductFromMeal,
-  updateMeal,
-  createMeal,
-} from "../../features/meals/api";
+import { updateMeal, createMeal } from "../../features/meals/api";
 import MealFormDialog from "../../features/meals/components/MealFormDialog";
 import MealList from "../../features/meals/components/MealList";
-import ProductSearchDialog from "../../features/meals/components/ProductSearchDialog";
 import { useMealsByDate } from "../../features/meals/hooks/useMealsByDate";
 import { useApiRequest } from "../../shared/hooks/useApiRequest";
+import { useNotification } from "../../shared/ui/notifications/useNotification";
 import SectionErrorState from "../../shared/ui/states/SectionErrorState";
 import SectionLoadingState from "../../shared/ui/states/SectionLoadingState";
 
@@ -29,20 +24,13 @@ function getTodayDateInputValue() {
 
 function MealsPage() {
   const { t } = useTranslation(["meals", "common"]);
+  const { notify } = useNotification();
   const [selectedDate, setSelectedDate] = useState(getTodayDateInputValue());
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingMeal, setEditingMeal] = useState(null);
-  const [productTargetMeal, setProductTargetMeal] = useState(null);
 
-  const {
-    meals,
-    setMeals,
-    loadMeals,
-    deleteMealOptimistic,
-    isLoading,
-    error,
-    retry,
-  } = useMealsByDate(selectedDate);
+  const { meals, loadMeals, deleteMealOptimistic, isLoading, error, retry } =
+    useMealsByDate(selectedDate);
 
   const createRequest = useApiRequest(
     ({ payload, signal }) => createMeal(payload, { signal }),
@@ -58,41 +46,11 @@ function MealsPage() {
     },
   );
 
-  const addProductRequest = useApiRequest(
-    ({ mealId, payload, signal }) =>
-      addProductToMeal(mealId, payload, { signal }),
-    {
-      manual: true,
-    },
-  );
-
-  const removeProductRequest = useApiRequest(
-    ({ mealId, productId, signal }) =>
-      removeProductFromMeal(mealId, productId, { signal }),
-    {
-      manual: true,
-    },
-  );
-
-  const isMutating =
-    createRequest.isLoading ||
-    updateRequest.isLoading ||
-    addProductRequest.isLoading ||
-    removeProductRequest.isLoading;
+  const isMutating = createRequest.isLoading || updateRequest.isLoading;
 
   const mutationError = useMemo(() => {
-    return (
-      createRequest.error ||
-      updateRequest.error ||
-      addProductRequest.error ||
-      removeProductRequest.error
-    );
-  }, [
-    addProductRequest.error,
-    createRequest.error,
-    removeProductRequest.error,
-    updateRequest.error,
-  ]);
+    return createRequest.error || updateRequest.error;
+  }, [createRequest.error, updateRequest.error]);
 
   const closeFormDialog = () => {
     setIsFormOpen(false);
@@ -110,53 +68,60 @@ function MealsPage() {
   };
 
   const handleSaveMeal = async (payload) => {
-    if (editingMeal?.id) {
-      await updateRequest.run({
-        mealId: editingMeal.id,
-        payload,
-      });
-    } else {
-      await createRequest.run({ payload });
-    }
+    try {
+      if (editingMeal?.id) {
+        await updateRequest.run({
+          mealId: editingMeal.id,
+          payload,
+        });
 
-    await loadMeals(selectedDate);
-    closeFormDialog();
+        notify({
+          severity: "success",
+          key: "meals.notifications.updated",
+          namespace: "meals",
+        });
+      } else {
+        await createRequest.run({ payload });
+
+        notify({
+          severity: "success",
+          key: "meals.notifications.created",
+          namespace: "meals",
+        });
+      }
+
+      await loadMeals(selectedDate);
+      closeFormDialog();
+    } catch (requestError) {
+      notify({
+        severity: "error",
+        message:
+          requestError?.message ||
+          t(
+            editingMeal?.id
+              ? "meals:notifications.updateFailed"
+              : "meals:notifications.createFailed",
+          ),
+      });
+
+      throw requestError;
+    }
   };
 
   const handleDeleteMeal = async (mealId) => {
-    await deleteMealOptimistic(mealId);
-  };
+    try {
+      await deleteMealOptimistic(mealId);
 
-  const handleAddProductToMeal = async (productPayload) => {
-    if (!productTargetMeal?.id) {
-      return;
-    }
-
-    const updatedMeal = await addProductRequest.run({
-      mealId: productTargetMeal.id,
-      payload: productPayload,
-    });
-
-    setMeals((currentMeals) =>
-      currentMeals.map((meal) =>
-        meal.id === updatedMeal.id ? updatedMeal : meal,
-      ),
-    );
-    setProductTargetMeal(null);
-  };
-
-  const handleRemoveProductFromMeal = async (mealId, productId) => {
-    const result = await removeProductRequest.run({
-      mealId,
-      productId,
-    });
-
-    if (result?.meal) {
-      setMeals((currentMeals) =>
-        currentMeals.map((meal) =>
-          meal.id === result.meal.id ? result.meal : meal,
-        ),
-      );
+      notify({
+        severity: "success",
+        key: "meals.notifications.deleted",
+        namespace: "meals",
+      });
+    } catch (requestError) {
+      notify({
+        severity: "error",
+        message: requestError?.message || t("meals:notifications.deleteFailed"),
+      });
     }
   };
 
@@ -213,8 +178,6 @@ function MealsPage() {
           onCreate={handleCreateClick}
           onEdit={handleEditMeal}
           onDelete={handleDeleteMeal}
-          onAddProduct={setProductTargetMeal}
-          onRemoveProduct={handleRemoveProductFromMeal}
           isMutating={isMutating}
         />
       )}
@@ -226,14 +189,9 @@ function MealsPage() {
           onClose={closeFormDialog}
           onSubmit={handleSaveMeal}
           isSubmitting={createRequest.isLoading || updateRequest.isLoading}
+          error={mutationError}
         />
       ) : null}
-
-      <ProductSearchDialog
-        open={Boolean(productTargetMeal)}
-        onClose={() => setProductTargetMeal(null)}
-        onConfirm={handleAddProductToMeal}
-      />
     </Stack>
   );
 }
