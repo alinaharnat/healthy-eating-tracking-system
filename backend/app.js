@@ -12,6 +12,7 @@ import iotRoutes from "./routes/iot.routes.js";
 import reportRoutes from "./routes/report.routes.js";
 import analyticsRoutes from "./routes/analytics.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
+import healthRoutes from "./routes/health.routes.js";
 
 const app = express();
 
@@ -46,7 +47,7 @@ app.use("/api/iot-measurements", iotRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/admin", adminRoutes);
-
+app.use("/api/health", healthRoutes);
 // Test route
 app.get("/", (req, res) => {
   res.json({

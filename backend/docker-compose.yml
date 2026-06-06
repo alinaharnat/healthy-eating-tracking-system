@@ -1,0 +1,37 @@
+services:
+  backend1:
+    build: .
+    env_file:
+      - .env
+    expose:
+      - "5000"
+
+  backend2:
+    build: .
+    env_file:
+      - .env
+    expose:
+      - "5000"
+
+  backend3:
+    build: .
+    env_file:
+      - .env
+    expose:
+      - "5000"
+
+  mongo:
+    image: mongo:8
+    ports:
+      - "27017:27017"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
