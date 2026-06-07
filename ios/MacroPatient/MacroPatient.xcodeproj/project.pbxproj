@@ -1,0 +1,404 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A308D6CD60657E9640ADC6A5 /* MacroPatientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253880CE3FA7BAEEB9A8C14 /* MacroPatientApp.swift */; };
+		A63C70DE6B7D4D47F1729BED /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA773FF25942AC16C89A606 /* AuthViewModel.swift */; };
+		ACBDD818D6023BB055A3359A /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198622414CA0D129B788C7 /* DashboardViewModel.swift */; };
+		AA81351E4629B5CB8BD7C065 /* DietitianViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC33EA3D9796D2F1CE601A70 /* DietitianViewModel.swift */; };
+		A42C297FEC5EE3B51EDC3555 /* IoTViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE11BAD2F2C2D109AD4C78 /* IoTViewModel.swift */; };
+		A1F72F149DBA5890EE1C08C8 /* MealsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A606105C13C993B3410FE0EF /* MealsViewModel.swift */; };
+		A66C218F78AEE8B635FD412D /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9739A99F6B0D01E7344661B /* ProfileViewModel.swift */; };
+		AC4B0B2C88E92E4BDA1D1A68 /* RecommendationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17E46E42F774921E94E6197 /* RecommendationsViewModel.swift */; };
+		AEA4E49E925C6A4CD6D52A76 /* ReportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB096017F845827276AD949 /* ReportsViewModel.swift */; };
+		AF290CF2B63280F1D0DA9ECD /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02EDA335C43D96CD76AE34D /* APIConfig.swift */; };
+		A0FE74F2FFC2E317AF9E2A5D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ADE32542CCA785605CEBB4 /* KeychainService.swift */; };
+		AEB6AC99D24F3934A2420D48 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F11EF47ADD4CD7AE31CE28 /* APIClient.swift */; };
+		A3E4061D954BD580BBFC11D5 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1ADFD89228577D9644BC5 /* APIError.swift */; };
+		A34BBE8552D4D7B07988A204 /* Identifiable+Mongo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7801CE01F3C7BECB3C3764 /* Identifiable+Mongo.swift */; };
+		A521279B4308BF0FDAC0BBA8 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE996B27387806BD4150FEA8 /* SessionManager.swift */; };
+		A5AA6E88AA41608890A16803 /* AnalyticsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D02A3F83E8B2E50F93F488 /* AnalyticsModels.swift */; };
+		A6FBC408E44671DA68CC768D /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A571706179E96ADEE2A35769 /* AuthModels.swift */; };
+		A439FD8C1C9CAC45EFECECE5 /* IoTModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3894B51E807740CA4727535 /* IoTModels.swift */; };
+		A7B0F337EBB02EE1F1338C51 /* MealModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAAC28330967A8B17822A77 /* MealModels.swift */; };
+		A775775567E7ED305FB13FB3 /* RecommendationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC381EF9081B7FEEBDFAD7B0 /* RecommendationModels.swift */; };
+		AB1424681B852A59361F9AB0 /* ReportModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249217C306186AA6E12397 /* ReportModels.swift */; };
+		AEDA64DA072E005EFDD5753D /* UserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60B0EBF56C50C5C418C19F2 /* UserModels.swift */; };
+		A5D4676A362E75D748DB83DC /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8137F3833479A7C45CCEF3F /* MainTabView.swift */; };
+		A451B12B8D9D0A2BFECFC5EB /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA14DC893E255D9CBC9F769 /* RootView.swift */; };
+		A2EEB06E189CB4307F9047A2 /* DietitianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA807A2AB9384EC03D2CF03A /* DietitianView.swift */; };
+		AF17BD015EF2942B703429BF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9125779CC9CEF79492A4F75 /* SettingsView.swift */; };
+		A5F7428F7AA0F0DA26348A25 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE18A0C76BC8B9C056C61F /* LoginView.swift */; };
+		A242D948EFBC9EE741BE22DC /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74239EE530C70CF383D50F2 /* RegisterView.swift */; };
+		A1F83549F6D9A1DDC2AD7CFC /* IoTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A4C946C01276D279A0D75 /* IoTView.swift */; };
+		AE7820E15889E3D245667092 /* RecommendationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A3B52328B4998BC5A9023 /* RecommendationsView.swift */; };
+		A00875CBE253638C5989E355 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF87A010E7FF00546B423DB /* DashboardView.swift */; };
+		ACE83D6581D8504AEFEEB9AC /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFDA8A247A815AA8B3016F9 /* LoadingOverlay.swift */; };
+		ABDE928A44D8AAF03551169B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0A359777723201C995952 /* ProfileView.swift */; };
+		A435DB7CEBDCA2FEFC39B5F1 /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8B4E12FC4F58EDD2CA0DAD /* AddMealView.swift */; };
+		A4BD219D2784118A7AA4FB0D /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A863722224C9FAA28BAA81A1 /* MealsView.swift */; };
+		A98A1D8D19D4026840EC2FEA /* ReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7C9BFD2A171188CD464042 /* ReportsView.swift */; };
+		AD533BA424539337B2D95319 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEC1ACD8C876853F92F2C47 /* AnalyticsService.swift */; };
+		AB2BA22BFE945912CB5F881E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0B964C210E2E6D5931CAB3 /* AuthService.swift */; };
+		A538B80138B910D3EFE74F61 /* IoTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A231E3F578FD7787AA3BDE31 /* IoTService.swift */; };
+		AB5F04B0234D5192791233EE /* MealService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE17408D48F983CEEF75CA6 /* MealService.swift */; };
+		A2A9C7F6993495D8266D28A7 /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62A15C6A36BA17BCA174988 /* ProductService.swift */; };
+		A5FBFDDD40B57EBCD1028900 /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459ADB8A03D84556A916F9 /* RecommendationService.swift */; };
+		A22FD7AADBB69D0C123DC789 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8941563EC7402EBBE36F22A /* ReportService.swift */; };
+		A597C77BDB8CC967FC7C790F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4F0E3A8E873690A25D4183 /* UserService.swift */; };
+		A7F541BB7BBCE1C0E2C54826 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8B40A3F1CAC9ADB66B78DD5 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A38A007151ABE87CC01A5B6E /* MacroPatient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacroPatient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A253880CE3FA7BAEEB9A8C14 /* MacroPatientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/MacroPatientApp.swift"; sourceTree = SOURCE_ROOT; };
+		AEA773FF25942AC16C89A606 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/ViewModels/AuthViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		AB198622414CA0D129B788C7 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/ViewModels/DashboardViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		AC33EA3D9796D2F1CE601A70 /* DietitianViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/ViewModels/DietitianViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		A1FE11BAD2F2C2D109AD4C78 /* IoTViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/ViewModels/IoTViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		A606105C13C993B3410FE0EF /* MealsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/ViewModels/MealsViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		A9739A99F6B0D01E7344661B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/ViewModels/ProfileViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		A17E46E42F774921E94E6197 /* RecommendationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/ViewModels/RecommendationsViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		AFB096017F845827276AD949 /* ReportsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/ViewModels/ReportsViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		A02EDA335C43D96CD76AE34D /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Core/Config/APIConfig.swift"; sourceTree = SOURCE_ROOT; };
+		A8ADE32542CCA785605CEBB4 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Core/Security/KeychainService.swift"; sourceTree = SOURCE_ROOT; };
+		A3F11EF47ADD4CD7AE31CE28 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Core/Networking/APIClient.swift"; sourceTree = SOURCE_ROOT; };
+		A0C1ADFD89228577D9644BC5 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Core/Networking/APIError.swift"; sourceTree = SOURCE_ROOT; };
+		AC7801CE01F3C7BECB3C3764 /* Identifiable+Mongo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Core/Extensions/Identifiable+Mongo.swift"; sourceTree = SOURCE_ROOT; };
+		AE996B27387806BD4150FEA8 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/App/SessionManager.swift"; sourceTree = SOURCE_ROOT; };
+		A7D02A3F83E8B2E50F93F488 /* AnalyticsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Models/AnalyticsModels.swift"; sourceTree = SOURCE_ROOT; };
+		A571706179E96ADEE2A35769 /* AuthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Models/AuthModels.swift"; sourceTree = SOURCE_ROOT; };
+		A3894B51E807740CA4727535 /* IoTModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Models/IoTModels.swift"; sourceTree = SOURCE_ROOT; };
+		AAAAC28330967A8B17822A77 /* MealModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Models/MealModels.swift"; sourceTree = SOURCE_ROOT; };
+		AC381EF9081B7FEEBDFAD7B0 /* RecommendationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Models/RecommendationModels.swift"; sourceTree = SOURCE_ROOT; };
+		AB249217C306186AA6E12397 /* ReportModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Models/ReportModels.swift"; sourceTree = SOURCE_ROOT; };
+		A60B0EBF56C50C5C418C19F2 /* UserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Models/UserModels.swift"; sourceTree = SOURCE_ROOT; };
+		A8137F3833479A7C45CCEF3F /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/MainTabView.swift"; sourceTree = SOURCE_ROOT; };
+		ACA14DC893E255D9CBC9F769 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/RootView.swift"; sourceTree = SOURCE_ROOT; };
+		AA807A2AB9384EC03D2CF03A /* DietitianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Dietitian/DietitianView.swift"; sourceTree = SOURCE_ROOT; };
+		A9125779CC9CEF79492A4F75 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Settings/SettingsView.swift"; sourceTree = SOURCE_ROOT; };
+		A0BE18A0C76BC8B9C056C61F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Auth/LoginView.swift"; sourceTree = SOURCE_ROOT; };
+		A74239EE530C70CF383D50F2 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Auth/RegisterView.swift"; sourceTree = SOURCE_ROOT; };
+		A55A4C946C01276D279A0D75 /* IoTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/IoT/IoTView.swift"; sourceTree = SOURCE_ROOT; };
+		A98A3B52328B4998BC5A9023 /* RecommendationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Recommendations/RecommendationsView.swift"; sourceTree = SOURCE_ROOT; };
+		ADF87A010E7FF00546B423DB /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Dashboard/DashboardView.swift"; sourceTree = SOURCE_ROOT; };
+		ACFDA8A247A815AA8B3016F9 /* LoadingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Components/LoadingOverlay.swift"; sourceTree = SOURCE_ROOT; };
+		A1E0A359777723201C995952 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Profile/ProfileView.swift"; sourceTree = SOURCE_ROOT; };
+		AB8B4E12FC4F58EDD2CA0DAD /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Meals/AddMealView.swift"; sourceTree = SOURCE_ROOT; };
+		A863722224C9FAA28BAA81A1 /* MealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Meals/MealsView.swift"; sourceTree = SOURCE_ROOT; };
+		AF7C9BFD2A171188CD464042 /* ReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Views/Reports/ReportsView.swift"; sourceTree = SOURCE_ROOT; };
+		AEEC1ACD8C876853F92F2C47 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Services/AnalyticsService.swift"; sourceTree = SOURCE_ROOT; };
+		AD0B964C210E2E6D5931CAB3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Services/AuthService.swift"; sourceTree = SOURCE_ROOT; };
+		A231E3F578FD7787AA3BDE31 /* IoTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Services/IoTService.swift"; sourceTree = SOURCE_ROOT; };
+		AFE17408D48F983CEEF75CA6 /* MealService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Services/MealService.swift"; sourceTree = SOURCE_ROOT; };
+		A62A15C6A36BA17BCA174988 /* ProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Services/ProductService.swift"; sourceTree = SOURCE_ROOT; };
+		A2459ADB8A03D84556A916F9 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Services/RecommendationService.swift"; sourceTree = SOURCE_ROOT; };
+		A8941563EC7402EBBE36F22A /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Services/ReportService.swift"; sourceTree = SOURCE_ROOT; };
+		AA4F0E3A8E873690A25D4183 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroPatient/Services/UserService.swift"; sourceTree = SOURCE_ROOT; };
+		A8B40A3F1CAC9ADB66B78DD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MacroPatient/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		A38ED30322495D02C679CFD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MacroPatient/Info.plist; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A7561BFB015D8F536760CB67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AEDA6D6223944636B9C5B54A = {
+			isa = PBXGroup;
+			children = (
+				AE54ED815E4F7D7A7177E9F8 /* MacroPatient */,
+				A021F2B7F3E0C61452C98748 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A021F2B7F3E0C61452C98748 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A38A007151ABE87CC01A5B6E /* MacroPatient.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AE54ED815E4F7D7A7177E9F8 /* MacroPatient */ = {
+			isa = PBXGroup;
+			children = (
+				A253880CE3FA7BAEEB9A8C14 /* MacroPatientApp.swift */,
+				AEA773FF25942AC16C89A606 /* AuthViewModel.swift */,
+				AB198622414CA0D129B788C7 /* DashboardViewModel.swift */,
+				AC33EA3D9796D2F1CE601A70 /* DietitianViewModel.swift */,
+				A1FE11BAD2F2C2D109AD4C78 /* IoTViewModel.swift */,
+				A606105C13C993B3410FE0EF /* MealsViewModel.swift */,
+				A9739A99F6B0D01E7344661B /* ProfileViewModel.swift */,
+				A17E46E42F774921E94E6197 /* RecommendationsViewModel.swift */,
+				AFB096017F845827276AD949 /* ReportsViewModel.swift */,
+				A02EDA335C43D96CD76AE34D /* APIConfig.swift */,
+				A8ADE32542CCA785605CEBB4 /* KeychainService.swift */,
+				A3F11EF47ADD4CD7AE31CE28 /* APIClient.swift */,
+				A0C1ADFD89228577D9644BC5 /* APIError.swift */,
+				AC7801CE01F3C7BECB3C3764 /* Identifiable+Mongo.swift */,
+				AE996B27387806BD4150FEA8 /* SessionManager.swift */,
+				A7D02A3F83E8B2E50F93F488 /* AnalyticsModels.swift */,
+				A571706179E96ADEE2A35769 /* AuthModels.swift */,
+				A3894B51E807740CA4727535 /* IoTModels.swift */,
+				AAAAC28330967A8B17822A77 /* MealModels.swift */,
+				AC381EF9081B7FEEBDFAD7B0 /* RecommendationModels.swift */,
+				AB249217C306186AA6E12397 /* ReportModels.swift */,
+				A60B0EBF56C50C5C418C19F2 /* UserModels.swift */,
+				A8137F3833479A7C45CCEF3F /* MainTabView.swift */,
+				ACA14DC893E255D9CBC9F769 /* RootView.swift */,
+				AA807A2AB9384EC03D2CF03A /* DietitianView.swift */,
+				A9125779CC9CEF79492A4F75 /* SettingsView.swift */,
+				A0BE18A0C76BC8B9C056C61F /* LoginView.swift */,
+				A74239EE530C70CF383D50F2 /* RegisterView.swift */,
+				A55A4C946C01276D279A0D75 /* IoTView.swift */,
+				A98A3B52328B4998BC5A9023 /* RecommendationsView.swift */,
+				ADF87A010E7FF00546B423DB /* DashboardView.swift */,
+				ACFDA8A247A815AA8B3016F9 /* LoadingOverlay.swift */,
+				A1E0A359777723201C995952 /* ProfileView.swift */,
+				AB8B4E12FC4F58EDD2CA0DAD /* AddMealView.swift */,
+				A863722224C9FAA28BAA81A1 /* MealsView.swift */,
+				AF7C9BFD2A171188CD464042 /* ReportsView.swift */,
+				AEEC1ACD8C876853F92F2C47 /* AnalyticsService.swift */,
+				AD0B964C210E2E6D5931CAB3 /* AuthService.swift */,
+				A231E3F578FD7787AA3BDE31 /* IoTService.swift */,
+				AFE17408D48F983CEEF75CA6 /* MealService.swift */,
+				A62A15C6A36BA17BCA174988 /* ProductService.swift */,
+				A2459ADB8A03D84556A916F9 /* RecommendationService.swift */,
+				A8941563EC7402EBBE36F22A /* ReportService.swift */,
+				AA4F0E3A8E873690A25D4183 /* UserService.swift */,
+				A8B40A3F1CAC9ADB66B78DD5 /* Assets.xcassets */,
+				A38ED30322495D02C679CFD7 /* Info.plist */,
+			);
+			name = MacroPatient;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A0E8A3AD980EC179856012B7 /* MacroPatient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A444E0C6D5E04B2A73FFD966 /* Build configuration list for PBXNativeTarget "MacroPatient" */;
+			buildPhases = (
+				ABCE16DD0260827ECF338C78 /* Sources */,
+				A7561BFB015D8F536760CB67 /* Frameworks */,
+				A0189424A5A60FED329FA868 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacroPatient;
+			productName = MacroPatient;
+			productReference = A38A007151ABE87CC01A5B6E /* MacroPatient.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A98F54143AB4E86B28C3AFEE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = A4B65CC6BA12D8DB6A008567 /* Build configuration list for PBXProject "MacroPatient" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AEDA6D6223944636B9C5B54A;
+			productRefGroup = A021F2B7F3E0C61452C98748 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A0E8A3AD980EC179856012B7 /* MacroPatient */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A0189424A5A60FED329FA868 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7F541BB7BBCE1C0E2C54826 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABCE16DD0260827ECF338C78 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A308D6CD60657E9640ADC6A5 /* MacroPatientApp.swift in Sources */,
+				A63C70DE6B7D4D47F1729BED /* AuthViewModel.swift in Sources */,
+				ACBDD818D6023BB055A3359A /* DashboardViewModel.swift in Sources */,
+				AA81351E4629B5CB8BD7C065 /* DietitianViewModel.swift in Sources */,
+				A42C297FEC5EE3B51EDC3555 /* IoTViewModel.swift in Sources */,
+				A1F72F149DBA5890EE1C08C8 /* MealsViewModel.swift in Sources */,
+				A66C218F78AEE8B635FD412D /* ProfileViewModel.swift in Sources */,
+				AC4B0B2C88E92E4BDA1D1A68 /* RecommendationsViewModel.swift in Sources */,
+				AEA4E49E925C6A4CD6D52A76 /* ReportsViewModel.swift in Sources */,
+				AF290CF2B63280F1D0DA9ECD /* APIConfig.swift in Sources */,
+				A0FE74F2FFC2E317AF9E2A5D /* KeychainService.swift in Sources */,
+				AEB6AC99D24F3934A2420D48 /* APIClient.swift in Sources */,
+				A3E4061D954BD580BBFC11D5 /* APIError.swift in Sources */,
+				A34BBE8552D4D7B07988A204 /* Identifiable+Mongo.swift in Sources */,
+				A521279B4308BF0FDAC0BBA8 /* SessionManager.swift in Sources */,
+				A5AA6E88AA41608890A16803 /* AnalyticsModels.swift in Sources */,
+				A6FBC408E44671DA68CC768D /* AuthModels.swift in Sources */,
+				A439FD8C1C9CAC45EFECECE5 /* IoTModels.swift in Sources */,
+				A7B0F337EBB02EE1F1338C51 /* MealModels.swift in Sources */,
+				A775775567E7ED305FB13FB3 /* RecommendationModels.swift in Sources */,
+				AB1424681B852A59361F9AB0 /* ReportModels.swift in Sources */,
+				AEDA64DA072E005EFDD5753D /* UserModels.swift in Sources */,
+				A5D4676A362E75D748DB83DC /* MainTabView.swift in Sources */,
+				A451B12B8D9D0A2BFECFC5EB /* RootView.swift in Sources */,
+				A2EEB06E189CB4307F9047A2 /* DietitianView.swift in Sources */,
+				AF17BD015EF2942B703429BF /* SettingsView.swift in Sources */,
+				A5F7428F7AA0F0DA26348A25 /* LoginView.swift in Sources */,
+				A242D948EFBC9EE741BE22DC /* RegisterView.swift in Sources */,
+				A1F83549F6D9A1DDC2AD7CFC /* IoTView.swift in Sources */,
+				AE7820E15889E3D245667092 /* RecommendationsView.swift in Sources */,
+				A00875CBE253638C5989E355 /* DashboardView.swift in Sources */,
+				ACE83D6581D8504AEFEEB9AC /* LoadingOverlay.swift in Sources */,
+				ABDE928A44D8AAF03551169B /* ProfileView.swift in Sources */,
+				A435DB7CEBDCA2FEFC39B5F1 /* AddMealView.swift in Sources */,
+				A4BD219D2784118A7AA4FB0D /* MealsView.swift in Sources */,
+				A98A1D8D19D4026840EC2FEA /* ReportsView.swift in Sources */,
+				AD533BA424539337B2D95319 /* AnalyticsService.swift in Sources */,
+				AB2BA22BFE945912CB5F881E /* AuthService.swift in Sources */,
+				A538B80138B910D3EFE74F61 /* IoTService.swift in Sources */,
+				AB5F04B0234D5192791233EE /* MealService.swift in Sources */,
+				A2A9C7F6993495D8266D28A7 /* ProductService.swift in Sources */,
+				A5FBFDDD40B57EBCD1028900 /* RecommendationService.swift in Sources */,
+				A22FD7AADBB69D0C123DC789 /* ReportService.swift in Sources */,
+				A597C77BDB8CC967FC7C790F /* UserService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A32FAAECAC742100F7753F0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A01F561AC4AB15D6A23A5797 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		A08488492B02298C01BE290F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MacroPatient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks");
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.macro.patient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A96032D14173E56518D3C719 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MacroPatient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks");
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.macro.patient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A4B65CC6BA12D8DB6A008567 /* Build configuration list for PBXProject "MacroPatient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A32FAAECAC742100F7753F0C /* Debug */,
+				A01F561AC4AB15D6A23A5797 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A444E0C6D5E04B2A73FFD966 /* Build configuration list for PBXNativeTarget "MacroPatient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A08488492B02298C01BE290F /* Debug */,
+				A96032D14173E56518D3C719 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = A98F54143AB4E86B28C3AFEE /* Project object */;
+}
